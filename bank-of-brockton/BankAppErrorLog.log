@@ -1,0 +1,9 @@
+
+
+{TRACE}    [com.brockton.dao.LoginCrudDaoImpl]    Connection Failedorg.postgresql.util.PSQLException: ERROR: duplicate key value violates unique constraint "customer_un_user_name_key"
+  Detail: Key (user_name)=(BrockE) already exists.    2021-02-02 13:48:32,062      
+{ERROR}    [com.brockton.dao.LoginCrudDaoImpl]    Connection Failed    2021-02-02 13:48:32,063      
+{TRACE}    [com.brockton.dao.AccountDAOImpl]    ERROR: insert or update on table "application" violates foreign key constraint "fk_customer"
+  Detail: Key (user_name)=(fjfjk) is not present in table "customer_un".    2021-02-07 14:50:13,127      
+{TRACE}    [com.brockton.dao.CustomerDAOImpl]    1    2021-02-07 15:02:19,916      
+{TRACE}    [com.brockton.dao.CustomerDAOImpl]    ERROR: value too long for type character varying(10)    2021-02-07 15:03:05,768      
