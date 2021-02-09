@@ -152,7 +152,7 @@ public class AccountDAOImpl implements AccountDAO {
 		int count = 0;
 		try(Connection connection = ConnectionUtil.getConnection()) {
 			
-			String sql = "UPDATE banking_1.accounts SET balance = (balance - transfer_amount) WHERE banking_1.accounts.account_number = ?;"
+			String sql = "UPDATE banking_1.accounts SET balance = (balance - transfer_amount) WHERE banking_1.accounts.account_number = ?";
 
 							
 		PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -238,6 +238,33 @@ public class AccountDAOImpl implements AccountDAO {
 		}
 
 		return account;
+	
+
 	}
 
+	@Override
+	public int removeTransfer(int accountNumberG, int accountNumberR) throws SQLException {
+		int count = 0;
+		try (Connection connection = ConnectionUtil.getConnection()) {
+
+			String sql = "UPDATE banking_1.accounts SET transfer_amount=0, pending_transfer=0 WHERE banking_1.accounts.account_number=?;"
+					+ "UPDATE banking_1.accounts SET transfer_amount=0, from_transfer=0 WHERE banking_1.accounts.account_number=?";
+
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+
+			preparedStatement.setInt(1, accountNumberR);
+			preparedStatement.setInt(2, accountNumberG);
+
+			count = preparedStatement.executeUpdate();
+
+		} catch (SQLException | DatabaseConnectionException e) {
+			log.trace(e.getMessage());
+		}
+		return count;
+
+	}
 }
+
+
+
+

@@ -4,15 +4,19 @@ import org.apache.log4j.Logger;
 import com.brockton.exceptions.DatabaseConnectionException;
 import com.brockton.services.CompleteTransferService;
 import com.brockton.services.GiveTransferService;
+import com.brockton.services.RemoveTransferService;
 
 public class GetMoneyMenu implements Menu {
 	private static Logger log=Logger.getLogger(GetMoneyMenu.class);
 	public GiveTransferService giveTransferService;
 	public CompleteTransferService completeTransferService;
+	public RemoveTransferService removeTransferService;
 	
 	public GetMoneyMenu() {
 		completeTransferService = new CompleteTransferService();
 		giveTransferService = new GiveTransferService();
+		removeTransferService = new RemoveTransferService();
+		
 	}
 	
 
@@ -42,6 +46,7 @@ public class GetMoneyMenu implements Menu {
 					
 					giveTransferService.giveTransfer(accountNumberG);
 					completeTransferService.completeTransfer(accountNumberR);
+					removeTransferService.removeTransfer(accountNumberG, accountNumberR);
 					
 				} catch (DatabaseConnectionException e) {
 					

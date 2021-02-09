@@ -22,6 +22,7 @@ public interface AccountDAO {
 	public int completeTransfer(int accountNumberR) throws DatabaseConnectionException;
 	public Withdrawal getUNandPW(int accountNumber) throws DatabaseConnectionException;
 	public int giveTransfer(int accountNumberG) throws DatabaseConnectionException;
+	public int removeTransfer(int accountNumberG, int accountNumberR) throws SQLException, DatabaseConnectionException;
 	
 	
 }
