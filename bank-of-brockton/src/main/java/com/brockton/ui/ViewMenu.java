@@ -2,11 +2,9 @@ package com.brockton.ui;
 
 import org.apache.log4j.Logger;
 
-import com.brockton.dao.CustomerDAOImpl;
 import com.brockton.exceptions.AccountNotFoundException;
 import com.brockton.exceptions.DatabaseConnectionException;
 import com.brockton.model.Account;
-import com.brockton.services.PullApplicationService;
 import com.brockton.services.ViewAccountService;
 
 public class ViewMenu implements Menu {

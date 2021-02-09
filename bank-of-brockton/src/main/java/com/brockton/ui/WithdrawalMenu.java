@@ -2,18 +2,24 @@ package com.brockton.ui;
 
 import org.apache.log4j.Logger;
 
-import com.brockton.dao.CustomerDAOImpl;
-import com.brockton.model.Account;
+
+import com.brockton.exceptions.AccountNotFoundException;
+import com.brockton.exceptions.DatabaseConnectionException;
 import com.brockton.model.Withdrawal;
+import com.brockton.services.AccountConfirmService;
 import com.brockton.services.WithdrawalService;
 
 public class WithdrawalMenu implements Menu {
-	private static Logger log=Logger.getLogger(WithdrawalMenu.class);
-
+	private static Logger log=Logger.getLogger(DepositMenu.class);
+	public AccountConfirmService accountConfirmService;
 	public WithdrawalService withdrawalService;
-	
-	public WithdrawalMenu() {
+	Withdrawal customer = null;
+	public WithdrawalMenu(Withdrawal customer) {
+		super ();
+		this.customer = customer;
 		withdrawalService = new WithdrawalService();
+		accountConfirmService = new AccountConfirmService();
+		
 	}
 	
 	
@@ -39,9 +45,22 @@ public class WithdrawalMenu implements Menu {
 			case 2:					
 				int accountNumber = getCustomerANInput();
 				int withdrawal = getCustomerWDInput();	
-				withdrawalService.makeWithdrawal(accountNumber, withdrawal);
-				
-				
+				try {
+					Withdrawal account = accountConfirmService.getUNandPW(accountNumber);
+					System.out.println(customer);
+					System.out.println(account);
+					
+					if (account.equals(customer)) {
+						withdrawalService.makeWithdrawal(accountNumber, withdrawal);
+						
+					}
+				} catch (AccountNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (DatabaseConnectionException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			break;
 		default:
 			System.out.println("No valid choice entered");

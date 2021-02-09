@@ -7,3 +7,14 @@
   Detail: Key (user_name)=(fjfjk) is not present in table "customer_un".    2021-02-07 14:50:13,127      
 {TRACE}    [com.brockton.dao.CustomerDAOImpl]    1    2021-02-07 15:02:19,916      
 {TRACE}    [com.brockton.dao.CustomerDAOImpl]    ERROR: value too long for type character varying(10)    2021-02-07 15:03:05,768      
+{TRACE}    [com.brockton.ui.CustLoginMenu]    Your Login Credentials were Invalid    2021-02-08 12:58:19,342      
+{TRACE}    [com.brockton.ui.CustLoginMenu]    Your Login Credentials were Invalid    2021-02-08 13:11:37,623      
+{TRACE}    [com.brockton.dao.AccountDAOImpl]    ERROR: missing FROM-clause entry for table "account"
+  Position: 74    2021-02-08 19:44:06,485      
+{TRACE}    [com.brockton.dao.AccountDAOImpl]    ERROR: missing FROM-clause entry for table "account"
+  Position: 74    2021-02-08 20:14:15,819      
+{TRACE}    [com.brockton.dao.AccountDAOImpl]    ERROR: missing FROM-clause entry for table "account"
+  Position: 74    2021-02-08 20:25:39,046      
+{TRACE}    [com.brockton.dao.AccountDAOImpl]    ERROR: missing FROM-clause entry for table "account"
+  Position: 74    2021-02-08 20:26:32,366      
+{TRACE}    [com.brockton.dao.AccountDAOImpl]    No value specified for parameter 2.    2021-02-08 21:18:56,393      

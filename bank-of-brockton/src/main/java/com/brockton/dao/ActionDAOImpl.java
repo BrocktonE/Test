@@ -1,6 +1,6 @@
 package com.brockton.dao;
 
-import java.io.IOException;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -97,10 +97,13 @@ public class ActionDAOImpl implements ActionDAO {
 				int startingBalance = rs.getInt("starting_balance");
 				int balance = rs.getInt("balance");
 				int customerId1 = rs.getInt("customer_id");
+				int fromTransferAN = rs.getInt("from_transfer");
 				int pendingTransferAN = rs.getInt("pending_transfer");
 				int transferAmount = rs.getInt("transfer_amount");
+				String customerUN = null;
+				String customerPW = null;
 				
-				account = new Account(id, accountNumber, accountType, startingBalance, balance, customerId1, pendingTransferAN, transferAmount);
+				account = new Account(id, accountNumber, accountType, startingBalance, balance, customerId1, fromTransferAN, pendingTransferAN, transferAmount, customerUN, customerPW);
 				
 			} else {
 				throw new AccountNotFoundException("No account was found with Customer ID matching " + customerId);

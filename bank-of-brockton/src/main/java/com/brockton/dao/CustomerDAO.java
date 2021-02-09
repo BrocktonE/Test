@@ -1,6 +1,6 @@
 package com.brockton.dao;
 
-import java.sql.Connection;
+
 import java.sql.SQLException;
 
 import com.brockton.model.Customer;

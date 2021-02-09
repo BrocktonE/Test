@@ -2,15 +2,11 @@ package com.brockton.services;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-
 import org.apache.log4j.Logger;
-
 import com.brockton.dao.AccountDAO;
 import com.brockton.dao.AccountDAOImpl;
-import com.brockton.dao.CustomerDAOImpl;
 import com.brockton.exceptions.DatabaseConnectionException;
-import com.brockton.model.Application;
-import com.brockton.model.Transfer;
+import com.brockton.model.Account;
 import com.brockton.util.ConnectionUtil;
 
 public class TransferService {
@@ -22,14 +18,14 @@ public class TransferService {
 		accountDAO = new AccountDAOImpl();
 		
 }
-public int transfer(Transfer transfer)	{
+public int transfer(Account account)	{
 	int count = 0;
 	
 	try (Connection connection = ConnectionUtil.getConnection()) {
 		
 			connection.setAutoCommit(false);
 			
-			count = accountDAO.transfer(transfer);
+			count = accountDAO.transfer(account);
 			
 			connection.commit();
 			

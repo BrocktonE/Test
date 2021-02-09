@@ -7,7 +7,7 @@ import org.apache.log4j.Logger;
 
 import com.brockton.dao.AccountDAO;
 import com.brockton.dao.AccountDAOImpl;
-import com.brockton.dao.CustomerDAOImpl;
+
 import com.brockton.exceptions.DatabaseConnectionException;
 import com.brockton.model.Application;
 import com.brockton.util.ConnectionUtil;

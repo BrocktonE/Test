@@ -8,7 +8,7 @@ import org.apache.log4j.Logger;
 import com.brockton.dao.CustomerDAO;
 import com.brockton.dao.CustomerDAOImpl;
 import com.brockton.exceptions.DatabaseConnectionException;
-import com.brockton.exceptions.InvalidUnPwException;
+
 import com.brockton.model.Customer;
 import com.brockton.util.ConnectionUtil;
 

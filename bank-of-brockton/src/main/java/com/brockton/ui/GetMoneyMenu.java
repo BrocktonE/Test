@@ -1,19 +1,18 @@
 package com.brockton.ui;
 
 import org.apache.log4j.Logger;
-
-import com.brockton.dao.CustomerDAOImpl;
 import com.brockton.exceptions.DatabaseConnectionException;
-import com.brockton.model.Transfer;
 import com.brockton.services.CompleteTransferService;
+import com.brockton.services.GiveTransferService;
 
 public class GetMoneyMenu implements Menu {
 	private static Logger log=Logger.getLogger(GetMoneyMenu.class);
-	
+	public GiveTransferService giveTransferService;
 	public CompleteTransferService completeTransferService;
 	
 	public GetMoneyMenu() {
 		completeTransferService = new CompleteTransferService();
+		giveTransferService = new GiveTransferService();
 	}
 	
 
@@ -36,18 +35,18 @@ public class GetMoneyMenu implements Menu {
 			case 1:
 				break;
 			case 2:
-				int accountNumber = getCustomerANInput();
+				int accountNumberG = getGivingANInput();
+				int accountNumberR = getCustomerANInput();
 				
 				try {
-					completeTransferService.completeTransfer(accountNumber);
+					
+					giveTransferService.giveTransfer(accountNumberG);
+					completeTransferService.completeTransfer(accountNumberR);
 					
 				} catch (DatabaseConnectionException e) {
 					
 					e.printStackTrace();
-				}
-				
-				
-			
+				}		
 				break;
 				
 			default:
@@ -59,14 +58,25 @@ public class GetMoneyMenu implements Menu {
 
 	
 		}
-	public int getCustomerANInput() {
-		int accountNumber;
+	public int getGivingANInput() {
+		int accountNumberG;
 		while (true) {
 			
-			System.out.println("Enter Account Number: ");
-			accountNumber = Integer.parseInt(Menu.sc.nextLine());
+			System.out.println("Enter Giving Account Number: ");
+			accountNumberG = Integer.parseInt(Menu.sc.nextLine());
 			
-			return accountNumber;
+			return accountNumberG;
+	
+		}	
+}
+	public int getCustomerANInput() {
+		int accountNumberR;
+		while (true) {
+			
+			System.out.println("Enter Reciepient Account Number: ");
+			accountNumberR = Integer.parseInt(Menu.sc.nextLine());
+			
+			return accountNumberR;
 	
 	}
 	

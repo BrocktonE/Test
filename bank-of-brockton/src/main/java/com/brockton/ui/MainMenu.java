@@ -1,10 +1,6 @@
 package com.brockton.ui;
 
-import java.util.Scanner;
-
 import org.apache.log4j.Logger;
-
-import com.brockton.dao.CustomerDAOImpl;
 
 public class MainMenu implements Menu {
 	private static Logger log=Logger.getLogger(MainMenu.class);

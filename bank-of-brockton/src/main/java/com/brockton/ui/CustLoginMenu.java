@@ -2,10 +2,11 @@ package com.brockton.ui;
 
 import org.apache.log4j.Logger;
 
-import com.brockton.dao.CustomerDAOImpl;
+
 import com.brockton.exceptions.CustomerNotFoundException;
 import com.brockton.exceptions.DatabaseConnectionException;
-import com.brockton.model.Customer;
+
+import com.brockton.model.Withdrawal;
 import com.brockton.services.CustLoginService;
 
 public class CustLoginMenu implements Menu {
@@ -42,7 +43,7 @@ public class CustLoginMenu implements Menu {
 			String userName = getcreateCustomerUNInput();
 			String passWord = getcreateCustomerPWInput();
 			try {
-				Customer customer = customerLoginService.lookforUNandPW(userName, passWord);
+				Withdrawal customer = customerLoginService.lookforUNandPW(userName, passWord);
 		//		System.out.println(customer);
 			
 				if (customer != null) {

@@ -1,11 +1,6 @@
 package com.brockton.model;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 
-import com.brockton.exceptions.DatabaseConnectionException;
-import com.brockton.util.ConnectionUtil;
 
 public class Transfer {
 

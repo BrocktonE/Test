@@ -1,15 +1,11 @@
 package com.brockton.services;
 
 import java.util.List;
-
 import org.apache.log4j.Logger;
-
 import com.brockton.dao.ActionDAO;
 import com.brockton.dao.ActionDAOImpl;
-import com.brockton.dao.CustomerDAOImpl;
 import com.brockton.exceptions.AccountNotFoundException;
 import com.brockton.exceptions.DatabaseConnectionException;
-import com.brockton.model.Application;
 import com.brockton.model.Transactions;
 
 public class ViewTransactionsService {

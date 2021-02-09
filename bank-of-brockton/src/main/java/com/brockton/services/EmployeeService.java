@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 import org.apache.log4j.Logger;
 
-import com.brockton.dao.CustomerDAOImpl;
+
 import com.brockton.dao.EmployeeDAO;
 import com.brockton.dao.EmployeeDAOImpl;
 import com.brockton.exceptions.DatabaseConnectionException;

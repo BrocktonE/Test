@@ -8,6 +8,8 @@ public class Withdrawal {
 	private int startingBalance;
 	private int balance;
 	private int customerId;
+	private String customerUN;
+	private String customerPW;
 
 	
 	public Withdrawal() {
@@ -15,13 +17,15 @@ public class Withdrawal {
 		
 	}
 
-	public Withdrawal(int id, int accountNumber, String accountType, int startingBalance, int balance, int customerId) {
+	public Withdrawal(int id, int accountNumber, String accountType, int startingBalance, int balance, int customerId, String customerUN, String customerPW) {
 		this.id = id;
 		this.accountNumber = accountNumber;
 		this.accountType = accountType;
 		this.startingBalance = startingBalance;
 		this.balance = balance;
 		this.customerId = customerId;
+		this.customerUN = customerUN;
+		this.customerPW = customerPW;
 		
 	}
 	public Withdrawal(int accountNumber, String accountType, int startingBalance, int balance, int customerId) {
@@ -35,9 +39,9 @@ public class Withdrawal {
 	this.accountNumber = accountNumber;
 	
 }
-	public Withdrawal(int accountNumber, int balance) {
-		this.accountNumber = accountNumber;
-		this.balance = balance;
+	public Withdrawal(String customerUN, String customerPW) {
+		this.customerUN = customerUN;
+		this.customerPW = customerPW;
 	
 }
 
@@ -89,10 +93,27 @@ public class Withdrawal {
 		this.customerId = customerId;
 	}
 
+	public String getCustomerUN() {
+		return customerUN;
+	}
+
+	public void setCustomerUN(String customerUN) {
+		this.customerUN = customerUN;
+	}
+
+	public String getCustomerPW() {
+		return customerPW;
+	}
+
+	public void setCustomerPW(String customerPW) {
+		this.customerPW = customerPW;
+	}
+
 	@Override
 	public String toString() {
 		return "Withdrawal [id=" + id + ", accountNumber=" + accountNumber + ", accountType=" + accountType
-				+ ", startingBalance=" + startingBalance + ", balance=" + balance + ", customerId=" + customerId + "]";
+				+ ", startingBalance=" + startingBalance + ", balance=" + balance + ", customerId=" + customerId
+				+ ", customerUN=" + customerUN + ", customerPW=" + customerPW + "]";
 	}
 
 	@Override
@@ -103,6 +124,8 @@ public class Withdrawal {
 		result = prime * result + ((accountType == null) ? 0 : accountType.hashCode());
 		result = prime * result + balance;
 		result = prime * result + customerId;
+		result = prime * result + ((customerPW == null) ? 0 : customerPW.hashCode());
+		result = prime * result + ((customerUN == null) ? 0 : customerUN.hashCode());
 		result = prime * result + id;
 		result = prime * result + startingBalance;
 		return result;
@@ -128,13 +151,24 @@ public class Withdrawal {
 			return false;
 		if (customerId != other.customerId)
 			return false;
+		if (customerPW == null) {
+			if (other.customerPW != null)
+				return false;
+		} else if (!customerPW.equals(other.customerPW))
+			return false;
+		if (customerUN == null) {
+			if (other.customerUN != null)
+				return false;
+		} else if (!customerUN.equals(other.customerUN))
+			return false;
 		if (id != other.id)
 			return false;
 		if (startingBalance != other.startingBalance)
 			return false;
 		return true;
 	}
-
-
-
+	
 }
+
+
+	

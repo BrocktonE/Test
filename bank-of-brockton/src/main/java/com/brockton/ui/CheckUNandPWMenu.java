@@ -1,25 +1,17 @@
 package com.brockton.ui;
 
-import org.apache.log4j.Logger;
-
-
 import com.brockton.exceptions.AccountNotFoundException;
 import com.brockton.exceptions.DatabaseConnectionException;
 import com.brockton.model.Withdrawal;
 import com.brockton.services.AccountConfirmService;
-import com.brockton.services.BalanceService;
 
-public class CheckBalanceMenu implements Menu {
-	private static Logger log=Logger.getLogger(CheckBalanceMenu.class);
-	public AccountConfirmService accountConfirmService;
-	public BalanceService balanceService;
-	Withdrawal customer = null;
-	public CheckBalanceMenu(Withdrawal customer) {
-		super ();
-		this.customer = customer;
-		balanceService = new BalanceService();
-		accountConfirmService = new AccountConfirmService();
-		
+
+public class CheckUNandPWMenu implements Menu {
+	
+public AccountConfirmService accountConfirmService;
+	
+	public CheckUNandPWMenu() {
+		accountConfirmService= new AccountConfirmService();
 		
 	}
 
@@ -45,20 +37,9 @@ public class CheckBalanceMenu implements Menu {
 				int accountNumber = getBalanceInput();
 				try {
 					Withdrawal account = accountConfirmService.getUNandPW(accountNumber);
-					System.out.println(customer);
 					System.out.println(account);
-					
-					if (account.equals(customer)) {
-					Withdrawal balance = balanceService.getBalance(accountNumber);
-					System.out.println(balance);
-						
-					}
-				} catch (AccountNotFoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (DatabaseConnectionException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+				} catch (AccountNotFoundException | DatabaseConnectionException e) {
+					System.out.println(e.getMessage());
 				}
 				
 				break;
@@ -95,3 +76,5 @@ public class CheckBalanceMenu implements Menu {
 
 
 
+	
+	

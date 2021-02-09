@@ -7,9 +7,10 @@ import java.sql.SQLException;
 
 import org.apache.log4j.Logger;
 
-import com.brockton.exceptions.CustomerNotFoundException;
+
 import com.brockton.exceptions.DatabaseConnectionException;
-import com.brockton.model.Customer;
+
+import com.brockton.model.Withdrawal;
 import com.brockton.util.ConnectionUtil;
 
 public class CustomerLoginDAOImp implements CustomerLoginDAO {
@@ -19,8 +20,8 @@ public class CustomerLoginDAOImp implements CustomerLoginDAO {
 
 
 	
-	public Customer lookforUNandPW(String userName, String passWord) throws DatabaseConnectionException   {
-		Customer customer = null;
+	public Withdrawal lookforUNandPW(String userName, String passWord) throws DatabaseConnectionException   {
+		Withdrawal customer = null;
 		try (Connection connection = ConnectionUtil.getConnection()) {
 			
 			String sql = "SELECT * FROM banking_1.customer_un WHERE (customer_un.user_name=? AND customer_un.password_1=?)";
@@ -31,10 +32,10 @@ public class CustomerLoginDAOImp implements CustomerLoginDAO {
 			ResultSet rs = pstmt.executeQuery();
 			
 			if (rs.next()) {
-				String userName1 = rs.getString("user_name");
-				String passWord1 = rs.getString("password_1");
+				String customerUN = rs.getString("user_name");
+				String customerPW = rs.getString("password_1");
 				
-				customer = new Customer(userName1, passWord1);
+				customer = new Withdrawal(customerUN, customerPW);
 				
 			}
 			

@@ -2,7 +2,7 @@ package com.brockton.services;
 
 import org.apache.log4j.Logger;
 
-import com.brockton.dao.CustomerDAOImpl;
+
 import com.brockton.dao.EmployeeLoginDAO;
 import com.brockton.dao.EmployeeLoginDAOImpl;
 import com.brockton.exceptions.DatabaseConnectionException;

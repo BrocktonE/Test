@@ -1,15 +1,15 @@
 package com.brockton.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
+
 import java.sql.SQLException;
 
 import com.brockton.exceptions.AccountNotFoundException;
 import com.brockton.exceptions.DatabaseConnectionException;
+import com.brockton.model.Account;
 import com.brockton.model.Application;
-import com.brockton.model.Transfer;
+
 import com.brockton.model.Withdrawal;
-import com.brockton.util.ConnectionUtil;
+
 
 
 public interface AccountDAO {
@@ -18,7 +18,10 @@ public interface AccountDAO {
 	public Withdrawal getBalance(int accountNumber) throws DatabaseConnectionException, AccountNotFoundException;
 	public int makeWithdrawal(int accountNumber, int withdrawal) throws DatabaseConnectionException;
 	public int makeDeposit(int accountNumber, int deposit) throws DatabaseConnectionException;
-	public int transfer(Transfer transfer) throws SQLException;
-	public int completeTransfer(int accountNumber) throws DatabaseConnectionException;
+	public int transfer(Account accounts) throws SQLException;
+	public int completeTransfer(int accountNumberR) throws DatabaseConnectionException;
+	public Withdrawal getUNandPW(int accountNumber) throws DatabaseConnectionException;
+	public int giveTransfer(int accountNumberG) throws DatabaseConnectionException;
+	
 	
 }

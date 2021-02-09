@@ -2,7 +2,7 @@ package com.brockton.ui;
 
 import org.apache.log4j.Logger;
 
-import com.brockton.dao.CustomerDAOImpl;
+
 import com.brockton.exceptions.DatabaseConnectionException;
 import com.brockton.exceptions.EmployeeNotFoundException;
 import com.brockton.model.Employee;

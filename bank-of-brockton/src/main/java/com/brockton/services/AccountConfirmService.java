@@ -1,32 +1,33 @@
 package com.brockton.services;
 
-import org.apache.log4j.Logger;
+
 
 import com.brockton.dao.AccountDAO;
 import com.brockton.dao.AccountDAOImpl;
-
 import com.brockton.exceptions.AccountNotFoundException;
 import com.brockton.exceptions.DatabaseConnectionException;
+
 import com.brockton.model.Withdrawal;
 
-public class BalanceService {
-	private static Logger log=Logger.getLogger(BalanceService.class);
 
-	AccountDAO accountDAO;
+public class AccountConfirmService {
+
+AccountDAO accountDAO;
 	
-	public BalanceService() {
+	public AccountConfirmService() {
 		accountDAO = new AccountDAOImpl();
 	
 	}
 	
-	public Withdrawal getBalance(int accountNumber) throws AccountNotFoundException, DatabaseConnectionException {
-		Withdrawal balance = accountDAO.getBalance(accountNumber);
+	public Withdrawal getUNandPW(int accountNumber) throws AccountNotFoundException, DatabaseConnectionException {
+		Withdrawal account = accountDAO.getUNandPW(accountNumber);
 		
-		if (balance != null) {
-			return balance;
+		if (account != null) {
+			return account;
 		} else {
 			throw new AccountNotFoundException("Your account number: " + accountNumber + "was not found");
 		}
 	}
 
 }
+

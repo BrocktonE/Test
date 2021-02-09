@@ -2,11 +2,12 @@ package com.brockton.dao;
 
 
 import com.brockton.exceptions.DatabaseConnectionException;
-import com.brockton.model.Customer;
+
+import com.brockton.model.Withdrawal;
 
 public interface CustomerLoginDAO {
 	
-	public Customer lookforUNandPW(String userName, String passWord) throws DatabaseConnectionException; 
+	public Withdrawal lookforUNandPW(String userName, String passWord) throws DatabaseConnectionException; 
 		
 	}
 	

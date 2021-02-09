@@ -2,7 +2,7 @@ package com.brockton.ui;
 
 import org.apache.log4j.Logger;
 
-import com.brockton.dao.CustomerDAOImpl;
+
 import com.brockton.model.Employee;
 import com.brockton.services.EmployeeService;
 

@@ -2,10 +2,8 @@ package com.brockton.ui;
 
 import org.apache.log4j.Logger;
 
-import com.brockton.dao.CustomerDAOImpl;
-import com.brockton.model.Application;
-import com.brockton.model.Transfer;
-import com.brockton.services.ApplicationService;
+
+import com.brockton.model.Account;
 import com.brockton.services.TransferService;
 
 public class TransferMenu implements Menu {
@@ -42,8 +40,8 @@ public class TransferMenu implements Menu {
 				
 				
 				
-				Transfer newTransfer = new Transfer(amount, accountNumber, toAccount);
-				transferService.transfer(newTransfer);
+				Account account = new Account(amount, accountNumber, toAccount);
+				transferService.transfer(account);
 				break;
 				
 			default:

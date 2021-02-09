@@ -2,12 +2,9 @@ package com.brockton.services;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-
 import org.apache.log4j.Logger;
-
 import com.brockton.dao.AccountDAO;
 import com.brockton.dao.AccountDAOImpl;
-import com.brockton.dao.CustomerDAOImpl;
 import com.brockton.exceptions.DatabaseConnectionException;
 import com.brockton.util.ConnectionUtil;
 
@@ -20,7 +17,9 @@ public class DepositService {
 		accountDAO = new AccountDAOImpl();
 		
 	}
-	public int makeWithdrawal(int deposit, int accountNumber) {
+
+		
+	public int makeDeposit(int deposit, int accountNumber) {
 		
 	
 		

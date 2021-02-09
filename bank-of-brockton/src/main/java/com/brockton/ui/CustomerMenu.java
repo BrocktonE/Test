@@ -1,11 +1,7 @@
 package com.brockton.ui;
 
-import java.util.Scanner;
 
 import org.apache.log4j.Logger;
-
-import com.brockton.dao.CustomerDAOImpl;
-import com.brockton.exceptions.InvalidUnPwException;
 import com.brockton.model.Customer;
 import com.brockton.services.CustomerService;
 

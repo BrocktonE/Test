@@ -2,7 +2,7 @@ package com.brockton.ui;
 
 import org.apache.log4j.Logger;
 
-import com.brockton.dao.CustomerDAOImpl;
+
 
 public class EmployeeActionMenu implements Menu {
 	private static Logger log=Logger.getLogger(EmployeeActionMenu.class);

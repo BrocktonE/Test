@@ -20,7 +20,7 @@ public class CompleteTransferService {
 		accountDAO = new AccountDAOImpl();
 	}
 	
-	public int completeTransfer(int accountNumber) throws DatabaseConnectionException {
+	public int completeTransfer(int accountNumberR) throws DatabaseConnectionException {
 		
 		int count = 0;
 		
@@ -28,7 +28,7 @@ public class CompleteTransferService {
 					connection.setAutoCommit(false);
 					
 					try {
-						count = accountDAO.completeTransfer(accountNumber);
+						count = accountDAO.completeTransfer(accountNumberR);
 					} catch (DatabaseConnectionException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
