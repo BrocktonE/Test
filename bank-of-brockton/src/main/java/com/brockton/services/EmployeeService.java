@@ -36,7 +36,7 @@ public class EmployeeService {
 				connection.commit();
 				
 			} catch (SQLException | DatabaseConnectionException e) {
-				log.trace(e.getMessage());
+				log.error(e.getMessage());
 			}
 			
 		return count;

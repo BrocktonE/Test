@@ -1,13 +1,16 @@
 package com.brockton.ui;
 
+import org.apache.log4j.Logger;
+
 import com.brockton.exceptions.AccountNotFoundException;
 import com.brockton.exceptions.DatabaseConnectionException;
 import com.brockton.model.Withdrawal;
 import com.brockton.services.AccountConfirmService;
 
 
+
 public class CheckUNandPWMenu implements Menu {
-	
+private static Logger log=Logger.getLogger(CheckUNandPWMenu.class);	
 public AccountConfirmService accountConfirmService;
 	
 	public CheckUNandPWMenu() {
@@ -19,11 +22,11 @@ public AccountConfirmService accountConfirmService;
 	public void display() {
 		int choice = 0;
 		do {
-			System.out.println("Player Menu");
-			System.out.println("============");
-			System.out.println("1.) Back");
-			System.out.println("2.) Check Balance");
-			System.out.println("Enter a choice between 1 and 2");
+			log.trace("Player Menu");
+			log.trace("============");
+			log.trace("1.) Back");
+			log.trace("2.) Check Balance");
+			log.trace("Enter a choice between 1 and 2");
 		
 			try {
 				choice = Integer.parseInt(Menu.sc.nextLine());
@@ -37,9 +40,9 @@ public AccountConfirmService accountConfirmService;
 				int accountNumber = getBalanceInput();
 				try {
 					Withdrawal account = accountConfirmService.getUNandPW(accountNumber);
-					System.out.println(account);
+					log.trace(account);
 				} catch (AccountNotFoundException | DatabaseConnectionException e) {
-					System.out.println(e.getMessage());
+					log.error(e.getMessage());
 				}
 				
 				break;
@@ -58,10 +61,10 @@ public AccountConfirmService accountConfirmService;
 		
 		while (true) {
 			try {
-				System.out.println("Enter an account number you would like the balance for: ");
+				log.trace("Enter an account number you would like the balance for: ");
 				accountNumber = Integer.parseInt(Menu.sc.nextLine());
 			} catch (NumberFormatException e) {
-				System.out.println("Account number not found, try again");
+				log.error("Account number not found, try again");
 				continue;
 			}
 			break;

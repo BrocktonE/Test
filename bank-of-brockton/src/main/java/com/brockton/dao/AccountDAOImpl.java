@@ -6,11 +6,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+
 import org.apache.log4j.Logger;
 
 import com.brockton.exceptions.AccountNotFoundException;
 import com.brockton.exceptions.DatabaseConnectionException;
 import com.brockton.model.Account;
+import com.brockton.model.AccountNumber;
 import com.brockton.model.Application;
 
 import com.brockton.model.Withdrawal;
@@ -24,9 +26,9 @@ public class AccountDAOImpl implements AccountDAO {
 	public AccountDAOImpl() {
 		super();
 	}
-
+	
 	@Override
-	public int createApplication(Application application) throws SQLException {
+	public int createApplication(Application application) throws SQLException, DatabaseConnectionException {
 		int count = 0;
 		try (Connection connection = ConnectionUtil.getConnection()) {
 
@@ -42,7 +44,7 @@ public class AccountDAOImpl implements AccountDAO {
 
 			count = preparedStatement.executeUpdate();
 		} catch (SQLException | DatabaseConnectionException e) {
-			log.trace(e.getMessage());
+			
 		}
 		return count;
 
@@ -53,21 +55,23 @@ public class AccountDAOImpl implements AccountDAO {
 		Withdrawal balance = null;
 		try (Connection connection = ConnectionUtil.getConnection()) {
 
-			String sql = "SELECT balance FROM banking_1.accounts WHERE account_number = ?";
+			String sql = "SELECT transfer_amount, balance FROM banking_1.accounts WHERE account_number = ?";
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setInt(1, accountNumber);
 			ResultSet rs = preparedStatement.executeQuery();
 
 			if (rs.next()) {
 				balance = new Withdrawal();
+				balance.setTransferAmount(rs.getInt("transfer_amount"));
 				balance.setBalance(rs.getInt("balance"));
+				
 
 			} else {
-				throw new AccountNotFoundException("Account Number: " + accountNumber + "was not found");
+				
 			}
 
-		} catch (SQLException e) {
-			throw new DatabaseConnectionException("Connection Failed");
+		} catch (SQLException | DatabaseConnectionException e) {
+		
 		}
 
 		return balance;
@@ -94,9 +98,10 @@ public class AccountDAOImpl implements AccountDAO {
 //			return 0;
 
 //	}
-
+	
 	@Override
-	public int makeDeposit(int accountNumber, int deposit) throws DatabaseConnectionException {
+	
+	public int makeDeposit(int accountNumber, int deposit) throws DatabaseConnectionException  {
 		int count = 0;
 		try (Connection connection = ConnectionUtil.getConnection()) {
 
@@ -112,9 +117,7 @@ public class AccountDAOImpl implements AccountDAO {
 
 			count = preparedStatement.executeUpdate();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-
+		
 		}
 
 		return 0;
@@ -141,14 +144,14 @@ public class AccountDAOImpl implements AccountDAO {
 			count = preparedStatement.executeUpdate();
 
 		} catch (SQLException | DatabaseConnectionException e) {
-			log.trace(e.getMessage());
+			
 		}
 		return count;
 
 	}
 
 	@Override
-	public int giveTransfer(int accountNumberG) throws DatabaseConnectionException {
+	public int giveTransfer(int accountNumberG) throws DatabaseConnectionException, AccountNotFoundException {
 		int count = 0;
 		try(Connection connection = ConnectionUtil.getConnection()) {
 			
@@ -187,7 +190,7 @@ public class AccountDAOImpl implements AccountDAO {
 
 		return 0;
 	}
-
+	@Override
 	public int makeWithdrawal(int accountNumber, int withdrawal) throws DatabaseConnectionException {
 		int count = 0;
 		try (Connection connection = ConnectionUtil.getConnection()) {
@@ -205,9 +208,7 @@ public class AccountDAOImpl implements AccountDAO {
 			count = preparedStatement.executeUpdate();
 
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-
+			
 		}
 
 		return 0;
@@ -215,7 +216,7 @@ public class AccountDAOImpl implements AccountDAO {
 	}
 
 	@Override
-	public Withdrawal getUNandPW(int accountNumber) throws DatabaseConnectionException {
+	public Withdrawal getUNandPW(int accountNumber) throws DatabaseConnectionException, AccountNotFoundException {
 		Withdrawal account = null;
 		try (Connection connection = ConnectionUtil.getConnection()) {
 
@@ -230,11 +231,11 @@ public class AccountDAOImpl implements AccountDAO {
 				account.setCustomerPW(rs.getString("customer_pw"));
 
 			} else {
-				throw new AccountNotFoundException("Account Number: " + accountNumber + "was not found");
+			//	throw new AccountNotFoundException("Account Number: " + accountNumber + "was not found");
 			}
 
-		} catch (SQLException | AccountNotFoundException e) {
-			throw new DatabaseConnectionException("Connection Failed");
+		} catch (SQLException e ) {
+			
 		}
 
 		return account;
@@ -258,13 +259,37 @@ public class AccountDAOImpl implements AccountDAO {
 			count = preparedStatement.executeUpdate();
 
 		} catch (SQLException | DatabaseConnectionException e) {
-			log.trace(e.getMessage());
+			log.error(e.getMessage());
 		}
 		return count;
 
 	}
+	@Override
+	public AccountNumber getPendingTransfer(int accountNumber) throws AccountNotFoundException, DatabaseConnectionException {
+		AccountNumber accountNumberG = null;
+		try (Connection connection = ConnectionUtil.getConnection()) {
+
+			String sql = "SELECT pending_transfer FROM banking_1.accounts WHERE account_number = ?";
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setInt(1, accountNumber);
+			ResultSet rs = preparedStatement.executeQuery();
+
+			if (rs.next()) {
+				accountNumberG = new AccountNumber();
+				accountNumberG.setPendingTransfer(rs.getInt("pending_transfer"));
+
+			} else {
+				throw new AccountNotFoundException("Account Number: " + accountNumber + "was not found");
+				
+			}
+
+		} catch (SQLException e) {
+			throw new DatabaseConnectionException("Connection Failed");
+		}
+
+		return accountNumberG;
+	
 }
 
 
-
-
+}

@@ -23,10 +23,10 @@ public class ViewTransactionsMenu implements Menu {
 		int choice = 0;
 		
 		do {
-			System.out.println("View Transactions Log");
-			System.out.println("======================");
-			System.out.println("1.) Back");
-			System.out.println("2.) Pull all Transactions");
+			log.trace("View Transactions Log");
+			log.trace("======================");
+			log.trace("1.) Back");
+			log.trace("2.) Pull all Transactions");
 			
 			try {
 				choice = Integer.parseInt(Menu.sc.nextLine());
@@ -52,7 +52,7 @@ public class ViewTransactionsMenu implements Menu {
 				break;
 				
 			default:
-				System.out.println("Choose Again");
+				log.trace("Choose Again");
 			}
 		
 	} while (choice !=1);

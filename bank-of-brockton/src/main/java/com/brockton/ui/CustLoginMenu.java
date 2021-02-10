@@ -26,10 +26,10 @@ public class CustLoginMenu implements Menu {
 		int choice = 0;
 		
 		do {
-			System.out.println("Customer Login");
-			System.out.println("==============");
-			System.out.println("1.) Back");
-			System.out.println("2.) Login");
+			log.trace("Customer Login");
+			log.trace("==============");
+			log.trace("1.) Back");
+			log.trace("2.) Login");
 			
 		try {
 			choice = Integer.parseInt(Menu.sc.nextLine());
@@ -47,25 +47,25 @@ public class CustLoginMenu implements Menu {
 		//		System.out.println(customer);
 			
 				if (customer != null) {
-		//		    System.out.println("Success you have logged in");
+				    System.out.println("Success you have logged in");
 				   Menu accountMenu = new AccountMenu(customer);
 				   accountMenu.display();
 				    
 				} else {
-					log.trace("login credentials not found");
+				//	log.error("login credentials not found");
 				}
 				
 				
 				
 			} catch (CustomerNotFoundException e) {
-				log.trace(e.getMessage());
+				log.error(e.getMessage());
 			} catch (DatabaseConnectionException e) {
-				e.printStackTrace();
+				log.error(e.getStackTrace());
 			}
 
 			break;
 		default:
-				System.out.println("No valid choice entered");
+				log.trace("No valid choice entered");
 
 		}
 
@@ -77,7 +77,7 @@ public class CustLoginMenu implements Menu {
 		String userName;
 		while (true) {
 			
-			System.out.println("Enter userName: ");
+			log.trace("Enter userName: ");
 			userName = Menu.sc.nextLine();
 			
 			return userName;
@@ -88,7 +88,7 @@ public class CustLoginMenu implements Menu {
 		String passWord;
 		while (true) {
 			
-			System.out.println("Enter your Password: ");
+			log.trace("Enter your Password: ");
 			passWord = sc.nextLine();
 			return passWord;
 		}

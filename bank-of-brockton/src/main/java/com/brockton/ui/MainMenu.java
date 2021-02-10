@@ -11,19 +11,19 @@ public class MainMenu implements Menu {
 
 	@Override
 	public void display() {
-		System.out.println("Welcome to the Bank of Brockton!");
-		System.out.println("====================================");
+		log.trace("Welcome to the Bank of Brockton!");
+		log.trace("====================================");
 		
 		int choice = 0;
 		do {
-			System.out.println("MAIN MENU");
-			System.out.println("==========");
-			System.out.println("1.) Exit Application");
-			System.out.println("2.) Create Customer UN and PW");
-			System.out.println("3.) Create Employee UN and PW");
-			System.out.println("4.) Employee Login");
-			System.out.println("5.) Customer Login");
-			System.out.println("Enter a choice between 1 and 5");
+			log.trace("MAIN MENU");
+			log.trace("==========");
+			log.trace("1.) Exit Application");
+			log.trace("2.) Create Customer UN and PW");
+			log.trace("3.) Create Employee UN and PW");
+			log.trace("4.) Employee Login");
+			log.trace("5.) Customer Login");
+			log.trace("Enter a choice between 1 and 5");
 			
 			try {
 				choice = Integer.parseInt(Menu.sc.nextLine());
@@ -49,7 +49,7 @@ public class MainMenu implements Menu {
 				Menu customerLoginMenu = new CustLoginMenu();
 				customerLoginMenu.display();
 			default:
-				System.out.println("Not valid, choose again");
+				log.trace("Not valid, choose again");
 		}
 			
 		} while (choice != 1);

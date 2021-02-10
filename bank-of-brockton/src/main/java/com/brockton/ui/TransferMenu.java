@@ -19,11 +19,11 @@ public class TransferMenu implements Menu {
 	public void display() {
 		int choice = 0;
 		do {
-			System.out.println("Please Complete the Transfer Form Below");
-			System.out.println("======================================");
-			System.out.println("1.) Back");
-			System.out.println("2.) Complete Transfer Form");
-			System.out.println("Please fill in all neccessary information in Application");
+			log.trace("Please Complete the Transfer Form Below");
+			log.trace("======================================");
+			log.trace("1.) Back");
+			log.trace("2.) Complete Transfer Form");
+			log.trace("Please fill in all neccessary information in Application");
 	
 			try {
 				choice = Integer.parseInt(Menu.sc.nextLine());
@@ -45,7 +45,7 @@ public class TransferMenu implements Menu {
 				break;
 				
 			default:
-				System.out.println("Choose Again");
+				log.trace("Choose Again");
 			}
 			
 		} while (choice !=1);
@@ -57,7 +57,7 @@ public class TransferMenu implements Menu {
 		int amount;
 		while(true) {
 			try {
-			System.out.println("Enter the amount you would like to transfer: ");
+				log.trace("Enter the amount you would like to transfer: ");
 			amount = Integer.parseInt(Menu.sc.nextLine());
 			} catch (NumberFormatException e) {
 				System.out.println("Invalid Input, try again");
@@ -75,7 +75,7 @@ public class TransferMenu implements Menu {
 			int accountNumber;
 			while(true) {
 				try {
-				System.out.println("Enter the account you would like to take money from: ");
+					log.trace("Enter the account you would like to take money from: ");
 				accountNumber = Integer.parseInt(Menu.sc.nextLine());
 				} catch (NumberFormatException e) {
 					System.out.println("Invalid Input, try again");
@@ -91,10 +91,10 @@ public int getToAccountInput() {
 	int toAccount;
 	while(true) {
 		try {
-		System.out.println("Enter the Account you would like to give money to: ");
+			log.trace("Enter the Account you would like to give money to: ");
 		toAccount = Integer.parseInt(Menu.sc.nextLine());
 		} catch (NumberFormatException e) {
-			System.out.println("Invalid Input, try again");
+			log.trace("Invalid Input, try again");
 			continue;
 		}
 		return toAccount;	

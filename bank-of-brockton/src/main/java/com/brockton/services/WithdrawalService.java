@@ -34,7 +34,7 @@ public class WithdrawalService {
 			    	connection.commit();
 				
 			} catch (SQLException | DatabaseConnectionException e) {
- 				
+ 				log.trace(e);
 			}
 		return count;
 }

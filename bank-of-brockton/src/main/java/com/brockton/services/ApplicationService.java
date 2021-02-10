@@ -21,7 +21,7 @@ public class ApplicationService {
 			accountDAO = new AccountDAOImpl();
 			
 	}
-	public int createApplication(Application application)	{
+	public int createApplication(Application application) throws SQLException, DatabaseConnectionException	{
 		int count = 0;
 		
 		try (Connection connection = ConnectionUtil.getConnection()) {
@@ -33,7 +33,7 @@ public class ApplicationService {
 				connection.commit();
 				
 		} catch (SQLException | DatabaseConnectionException e) {
-			log.trace(e.getMessage());
+		
 	}
 		
 	return count;

@@ -7,7 +7,9 @@ import org.apache.log4j.Logger;
 
 import com.brockton.dao.AccountDAO;
 import com.brockton.dao.AccountDAOImpl;
+import com.brockton.exceptions.AccountNotFoundException;
 import com.brockton.exceptions.DatabaseConnectionException;
+import com.brockton.model.AccountNumber;
 import com.brockton.util.ConnectionUtil;
 
 public class GiveTransferService {
@@ -19,7 +21,7 @@ public class GiveTransferService {
 			accountDAO = new AccountDAOImpl();
 		}
 		
-		public int giveTransfer(int accountNumberG) throws DatabaseConnectionException {
+		public int giveTransfer(int accountNumberG) throws DatabaseConnectionException, AccountNotFoundException {
 			
 			int count = 0;
 			

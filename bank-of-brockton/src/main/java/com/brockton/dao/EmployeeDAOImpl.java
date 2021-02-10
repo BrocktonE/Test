@@ -32,7 +32,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 			count = preparedStatement.executeUpdate();
 			
 		} catch (SQLException | DatabaseConnectionException e)  {
-			log.trace(e.getMessage());
+			log.error(e.getMessage());
 		}
 		
 		return count;

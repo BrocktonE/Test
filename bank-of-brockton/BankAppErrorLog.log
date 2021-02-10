@@ -1,20 +1,24 @@
-
-
-{TRACE}    [com.brockton.dao.LoginCrudDaoImpl]    Connection Failedorg.postgresql.util.PSQLException: ERROR: duplicate key value violates unique constraint "customer_un_user_name_key"
-  Detail: Key (user_name)=(BrockE) already exists.    2021-02-02 13:48:32,062      
-{ERROR}    [com.brockton.dao.LoginCrudDaoImpl]    Connection Failed    2021-02-02 13:48:32,063      
-{TRACE}    [com.brockton.dao.AccountDAOImpl]    ERROR: insert or update on table "application" violates foreign key constraint "fk_customer"
-  Detail: Key (user_name)=(fjfjk) is not present in table "customer_un".    2021-02-07 14:50:13,127      
-{TRACE}    [com.brockton.dao.CustomerDAOImpl]    1    2021-02-07 15:02:19,916      
-{TRACE}    [com.brockton.dao.CustomerDAOImpl]    ERROR: value too long for type character varying(10)    2021-02-07 15:03:05,768      
-{TRACE}    [com.brockton.ui.CustLoginMenu]    Your Login Credentials were Invalid    2021-02-08 12:58:19,342      
-{TRACE}    [com.brockton.ui.CustLoginMenu]    Your Login Credentials were Invalid    2021-02-08 13:11:37,623      
-{TRACE}    [com.brockton.dao.AccountDAOImpl]    ERROR: missing FROM-clause entry for table "account"
-  Position: 74    2021-02-08 19:44:06,485      
-{TRACE}    [com.brockton.dao.AccountDAOImpl]    ERROR: missing FROM-clause entry for table "account"
-  Position: 74    2021-02-08 20:14:15,819      
-{TRACE}    [com.brockton.dao.AccountDAOImpl]    ERROR: missing FROM-clause entry for table "account"
-  Position: 74    2021-02-08 20:25:39,046      
-{TRACE}    [com.brockton.dao.AccountDAOImpl]    ERROR: missing FROM-clause entry for table "account"
-  Position: 74    2021-02-08 20:26:32,366      
-{TRACE}    [com.brockton.dao.AccountDAOImpl]    No value specified for parameter 2.    2021-02-08 21:18:56,393      
+{ERROR}    [com.brockton.ui.CustLoginMenu]    ==============    2021-02-10 10:40:33,461      
+{ERROR}    [com.brockton.ui.CustLoginMenu]    2.) Login    2021-02-10 10:40:33,461      
+{ERROR}    [com.brockton.ui.DepositMenu]    try again    2021-02-10 11:55:14,413      
+{ERROR}    [com.brockton.ui.CustLoginMenu]    Your Login Credentials were Invalid    2021-02-10 12:06:47,640      
+{ERROR}    [com.brockton.ui.DepositMenu]    Connection Failed    2021-02-10 12:07:02,171      
+{ERROR}    [com.brockton.ui.DepositMenu]    Please enter an Account Number that you currently own    2021-02-10 12:49:35,530      
+{ERROR}    [com.brockton.ui.DepositMenu]        2021-02-10 12:49:35,531      
+{ERROR}    [com.brockton.ui.DepositMenu]    Please enter an Account Number that you currently own    2021-02-10 12:53:18,895      
+{ERROR}    [com.brockton.ui.DepositMenu]        2021-02-10 12:53:18,895      
+{ERROR}    [com.brockton.ui.CustLoginMenu]    Your Login Credentials were Invalid    2021-02-10 13:19:50,176      
+{ERROR}    [com.brockton.ui.CustLoginMenu]    Your Login Credentials were Invalid    2021-02-10 13:23:23,593      
+{ERROR}    [com.brockton.ui.CustLoginMenu]    Your Login Credentials were Invalid    2021-02-10 13:30:59,673      
+{ERROR}    [com.brockton.ui.EmployeeLoginMenu]    Your Login Credentials are Invalid    2021-02-10 13:36:27,976      
+{ERROR}    [com.brockton.ui.CheckBalanceMenu]    Please enter an Account Number that you currently own    2021-02-10 13:44:07,515      
+{ERROR}    [com.brockton.ui.CheckBalanceMenu]        2021-02-10 13:44:07,515      
+{ERROR}    [com.brockton.ui.CustLoginMenu]    Your Login Credentials were Invalid    2021-02-10 13:49:32,218      
+{ERROR}    [com.brockton.dao.CustomerDAOImpl]    ERROR: value too long for type character varying(10)    2021-02-10 13:52:00,135      
+{ERROR}    [com.brockton.ui.DepositMenu]    Please enter an Account Number that you currently own    2021-02-10 13:56:17,670      
+{ERROR}    [com.brockton.ui.DepositMenu]        2021-02-10 13:56:17,670      
+{ERROR}    [com.brockton.ui.EmployeeLoginMenu]    Your Login Credentials are Invalid    2021-02-10 13:57:54,727      
+{ERROR}    [com.brockton.dao.EmployeeDAOImpl]    ERROR: value too long for type character varying(10)    2021-02-10 13:58:39,054      
+{ERROR}    [com.brockton.ui.EmployeeLoginMenu]    Your Login Credentials are Invalid    2021-02-10 14:01:05,161      
+{ERROR}    [com.brockton.ui.EmployeeLoginMenu]    Your Login Credentials are Invalid    2021-02-10 14:08:18,809      
+{ERROR}    [com.brockton.dao.EmployeeDAOImpl]    ERROR: value too long for type character varying(8)    2021-02-10 14:13:30,904      

@@ -19,7 +19,7 @@ public class DepositService {
 	}
 
 		
-	public int makeDeposit(int deposit, int accountNumber) {
+	public int makeDeposit(int deposit, int accountNumber) throws DatabaseConnectionException {
 		
 	
 		
@@ -34,7 +34,7 @@ public class DepositService {
 		    	connection.commit();
 			
 		} catch (SQLException | DatabaseConnectionException e) {
-				
+		
 		}
 	return count;
 }

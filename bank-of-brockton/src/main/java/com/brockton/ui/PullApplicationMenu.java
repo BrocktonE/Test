@@ -24,10 +24,10 @@ public class PullApplicationMenu implements Menu {
 		int choice = 0;
 		
 		do {
-			System.out.println("Pull All Applications");
-			System.out.println("======================");
-			System.out.println("1.) Back");
-			System.out.println("2.) Pull all Applications");
+			log.trace("Pull All Applications");
+			log.trace("======================");
+			log.trace("1.) Back");
+			log.trace("2.) Pull all Applications");
 			
 			try {
 				choice = Integer.parseInt(Menu.sc.nextLine());
@@ -52,7 +52,7 @@ public class PullApplicationMenu implements Menu {
 				break;
 				
 			default:
-				System.out.println("Choose Again");
+				log.trace("Choose Again");
 			}
 		
 	} while (choice !=1);

@@ -27,11 +27,11 @@ public class CheckBalanceMenu implements Menu {
 	public void display() {
 		int choice = 0;
 		do {
-			System.out.println("Player Menu");
-			System.out.println("============");
-			System.out.println("1.) Back");
-			System.out.println("2.) Check Balance");
-			System.out.println("Enter a choice between 1 and 2");
+			log.trace("Player Menu");
+			log.trace("============");
+			log.trace("1.) Back");
+			log.trace("2.) Check Balance");
+			log.trace("Enter a choice between 1 and 2");
 		
 			try {
 				choice = Integer.parseInt(Menu.sc.nextLine());
@@ -45,25 +45,29 @@ public class CheckBalanceMenu implements Menu {
 				int accountNumber = getBalanceInput();
 				try {
 					Withdrawal account = accountConfirmService.getUNandPW(accountNumber);
-					System.out.println(customer);
-					System.out.println(account);
+					log.trace(customer);
+					log.trace(account);
 					
 					if (account.equals(customer)) {
 					Withdrawal balance = balanceService.getBalance(accountNumber);
-					System.out.println(balance);
+					log.trace(balance);
 						
 					}
+					
+					else {
+						throw new AccountNotFoundException();
+					}
 				} catch (AccountNotFoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					log.error("Please enter an Account Number that you currently own");
+					log.error(e.getMessage());
 				} catch (DatabaseConnectionException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					log.error("Connection Failed");
+					log.error(e.getMessage());
 				}
 				
 				break;
 			default:
-				System.out.println("No valid choice entered, try again");
+				log.trace("No valid choice entered, try again");
 				
 			}
 		
@@ -77,10 +81,10 @@ public class CheckBalanceMenu implements Menu {
 		
 		while (true) {
 			try {
-				System.out.println("Enter an account number you would like the balance for: ");
+				log.trace("Enter an account number you would like the balance for: ");
 				accountNumber = Integer.parseInt(Menu.sc.nextLine());
 			} catch (NumberFormatException e) {
-				System.out.println("Account number not found, try again");
+				log.trace("Account number not found, try again");
 				continue;
 			}
 			break;

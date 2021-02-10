@@ -22,10 +22,10 @@ public class ViewMenu implements Menu {
 int choice = 0;
 		
 		do {
-			System.out.println("View Customer Account Menu");
-			System.out.println("======================");
-			System.out.println("1.) Back");
-			System.out.println("2.) View Customer Account");
+			log.trace("View Customer Account Menu");
+			log.trace("======================");
+			log.trace("1.) Back");
+			log.trace("2.) View Customer Account");
 			
 			try {
 				choice = Integer.parseInt(Menu.sc.nextLine());
@@ -39,9 +39,9 @@ int choice = 0;
 				int customerId = getCustomerByIdInput();
 				try {
 					Account account = viewAccountService.viewAccount(customerId);
-					System.out.println(account);
+					log.trace(account);
 				} catch (AccountNotFoundException e) {
-					System.out.println(e.getMessage());
+					log.error(e.getMessage());
 				} catch (DatabaseConnectionException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -50,7 +50,7 @@ int choice = 0;
 				break;
 				
 			default:
-				System.out.println("Choose Again");
+				log.trace("Choose Again");
 			}
 		
 	} while (choice !=1);
@@ -64,11 +64,11 @@ int choice = 0;
 		
 		while (true) {
 			try {
-				System.out.println("Enter the Customer ID to look up an Account");
+				log.trace("Enter the Customer ID to look up an Account");
 				customerId = Integer.parseInt(Menu.sc.nextLine());
 				
 			} catch (NumberFormatException e) {
-				System.out.println("Invalid Input, try again");
+				log.trace("Invalid Input, try again");
 				continue;
 			}
 			break;

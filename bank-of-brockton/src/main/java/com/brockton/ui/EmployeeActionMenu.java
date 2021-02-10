@@ -12,14 +12,14 @@ public class EmployeeActionMenu implements Menu {
 	public void display() {
 		int choice = 0;
 		do {
-			System.out.println("Account Menu");
-			System.out.println("=============");
-			System.out.println("1.) Back");
-			System.out.println("2.) Pull Applications");
-			System.out.println("3.) Approve/Reject Customer Application");
-			System.out.println("4.) View Customer Account");
-			System.out.println("5.) Create Customer Account");
-			System.out.println("6.) View All Transactions");
+			log.trace("Account Menu");
+			log.trace("=============");
+			log.trace("1.) Back");
+			log.trace("2.) Pull Applications");
+			log.trace("3.) Approve/Reject Customer Application");
+			log.trace("4.) View Customer Account");
+			log.trace("5.) Create Customer Account");
+			log.trace("6.) View All Transactions");
 			
 			try {
 				choice = Integer.parseInt(Menu.sc.nextLine());
@@ -43,14 +43,14 @@ public class EmployeeActionMenu implements Menu {
 				
 				break;
 			case 5:
-				System.out.println("Choice 5");
+				log.trace("Choice 5");
 				break;
 			case 6:
 				Menu viewTransactionsMenu = new ViewTransactionsMenu();
 				viewTransactionsMenu.display();
 				break;
 			default:
-				System.out.println("Choose Again");
+				log.trace("Choose Again");
 				break;				
 			}
 					

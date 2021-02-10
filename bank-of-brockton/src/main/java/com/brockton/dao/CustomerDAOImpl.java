@@ -34,7 +34,7 @@ public class CustomerDAOImpl implements CustomerDAO {
 				
 			
 		} catch (SQLException | DatabaseConnectionException e)	 {
-			log.trace(e.getMessage());
+			log.error(e.getMessage());
 		}
 		
 	

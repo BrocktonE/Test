@@ -28,11 +28,11 @@ public class WithdrawalMenu implements Menu {
 	public void display() {
 		int choice = 0;
 		do {
-			System.out.println("Withdrawal Menu");
-			System.out.println("============");
-			System.out.println("1.) Back");
-			System.out.println("2.) Make Withdrawal");
-			System.out.println("Enter a choice between 1 and 2");
+			log.trace("Withdrawal Menu");
+			log.trace("============");
+			log.trace("1.) Back");
+			log.trace("2.) Make Withdrawal");
+			log.trace("Enter a choice between 1 and 2");
 		
 			try {
 				choice = Integer.parseInt(Menu.sc.nextLine());
@@ -63,7 +63,7 @@ public class WithdrawalMenu implements Menu {
 				}
 			break;
 		default:
-			System.out.println("No valid choice entered");
+			log.trace("No valid choice entered");
 		
 		}	
 	} while (choice !=1);
@@ -73,7 +73,7 @@ public class WithdrawalMenu implements Menu {
 		int accountNumber;
 		while (true) {
 			
-			System.out.println("Enter Account Number: ");
+			log.trace("Enter Account Number: ");
 			accountNumber = Integer.parseInt(Menu.sc.nextLine());
 			
 			return accountNumber;
@@ -86,7 +86,7 @@ public class WithdrawalMenu implements Menu {
 	int withdrawal;
 	while (true) {
 		
-		System.out.println("Enter your Withdrawal Ammount:");
+		log.trace("Enter your Withdrawal Ammount:");
 		withdrawal = Integer.parseInt(Menu.sc.nextLine());
 		
 		return withdrawal;

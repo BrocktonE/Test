@@ -1,8 +1,10 @@
 package com.brockton.ui;
 
+import java.sql.SQLException;
+
 import org.apache.log4j.Logger;
 
-
+import com.brockton.exceptions.DatabaseConnectionException;
 import com.brockton.model.Application;
 import com.brockton.services.ApplicationService;
 
@@ -19,11 +21,11 @@ public class ApplicationMenu implements Menu {
 	public void display() {
 		int choice = 0;
 		do {
-			System.out.println("Please fill out the Application Below:");
-			System.out.println("======================================");
-			System.out.println("1.) Back");
-			System.out.println("2.) Complete Application");
-			System.out.println("Please fill in all neccessary information in Application");
+			log.trace("Please fill out the Application Below:");
+			log.trace("======================================");
+			log.trace("1.) Back");
+			log.trace("2.) Complete Application");
+			log.trace("Please fill in all neccessary information in Application");
 	
 			try {
 				choice = Integer.parseInt(Menu.sc.nextLine());
@@ -41,11 +43,20 @@ public class ApplicationMenu implements Menu {
 				int initialDeposit = getInitialDepositInput();
 				
 				Application newApplication = new Application(userName, firstName, lastName, accountType, initialDeposit);
-				applicationService.createApplication(newApplication);
+				try {
+					applicationService.createApplication(newApplication);
+				} catch (SQLException e) {
+					
+					e.printStackTrace();
+				} catch (DatabaseConnectionException e) {
+			
+					e.printStackTrace();
+				}
+				System.out.println(newApplication);
 				break;
 				
 			default:
-				System.out.println("Choose Again");
+				log.trace("Choose Again");
 			}
 			
 		} while (choice !=1);
@@ -55,7 +66,7 @@ public class ApplicationMenu implements Menu {
 	public String getcreateuserNameInput() {
 		String userName;
 		while(true) {
-			System.out.println("Enter your User Name: ");
+			log.trace("Enter your User Name: ");
 			userName = sc.nextLine();
 			return userName;		
 		}
@@ -65,7 +76,7 @@ public class ApplicationMenu implements Menu {
 			String firstName;
 			while(true) {
 				
-				System.out.println("Enter your FirstName: ");
+				log.trace("Enter your FirstName: ");
 				firstName = sc.nextLine();
 				return firstName;
 			}		
@@ -75,7 +86,7 @@ public class ApplicationMenu implements Menu {
 		String lastName;
 		while(true) {
 			
-			System.out.println("Enter your LastName: ");
+			log.trace("Enter your LastName: ");
 			lastName = sc.nextLine();
 			return lastName;
 		}
@@ -85,7 +96,7 @@ public class ApplicationMenu implements Menu {
 		String accountType;
 		while(true) {
 			
-			System.out.println("Enter your desired Account Type");
+			log.trace("Enter your desired Account Type");
 			accountType = Menu.sc.nextLine();
 			return accountType;
 		}
@@ -96,7 +107,7 @@ public class ApplicationMenu implements Menu {
 		int initialDeposit;
 		while (true) {
 				try {
-					System.out.println("Enter an Initial Deposit Amount: ");
+					log.trace("Enter an Initial Deposit Amount: ");
 					initialDeposit = Integer.parseInt(Menu.sc.nextLine());
 				} catch (NumberFormatException e) {
 					System.out.println("Invalid input, try again.");

@@ -22,16 +22,16 @@ public class AccountMenu implements Menu {
 		
 	//	System.out.println(customer);
 		do {
-			System.out.println("Account Menu");
-			System.out.println("=============");
-			System.out.println("1.) Back");
-			System.out.println("2.) Apply for a new Account");
-			System.out.println("3.) Check Balance");
-			System.out.println("4.) Make a Withdrawal");
-			System.out.println("5.) Make a Deposit");
-			System.out.println("6.) Make a Transfer");
-			System.out.println("7.) Accept a Transfer");
-			System.out.println("8.) Check UN and PW");
+			log.trace("Account Menu");
+			log.trace("=============");
+			log.trace("1.) Back");
+			log.trace("2.) Apply for a new Account");
+			log.trace("3.) Check Balance");
+			log.trace("4.) Make a Withdrawal");
+			log.trace("5.) Make a Deposit");
+			log.trace("6.) Make a Transfer");
+			log.trace("7.) Accept a Transfer");
+			log.trace("8.) Check UN and PW");
 			
 			try {
 				choice = Integer.parseInt(Menu.sc.nextLine());
@@ -63,14 +63,16 @@ public class AccountMenu implements Menu {
 				transferMenu.display();
 				break;
 			case 7:
-				Menu getMoneyMenu = new GetMoneyMenu();
+				Menu getMoneyMenu = new GetMoneyMenu(customer);
 				getMoneyMenu.display();
 			case 8:
 				Menu checkUNandPWMenu = new CheckUNandPWMenu();
-				checkUNandPWMenu.display();;
+				checkUNandPWMenu.display();
 			break;
+			case 9:
+//				Menu getPendingTransferMenu 
 			default:
-				System.out.println("Choose Again");
+				log.trace("Choose Again");
 				break;				
 			}
 					

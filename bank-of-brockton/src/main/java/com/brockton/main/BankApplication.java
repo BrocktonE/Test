@@ -10,8 +10,8 @@ public class BankApplication {
 	private static Logger log=Logger.getLogger(BankApplication.class);
 	
 	public static void main(String[] args) {
-		System.out.println("Welcome to the Bank of Brockton!");
-		System.out.println("====================================");
+		log.trace("Welcome to the Bank of Brockton!");
+		log.trace("====================================");
 		
 		Menu mainMenu = new MainMenu();
 		mainMenu.display();

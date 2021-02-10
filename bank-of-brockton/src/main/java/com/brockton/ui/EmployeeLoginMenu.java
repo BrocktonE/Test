@@ -23,10 +23,10 @@ public class EmployeeLoginMenu implements Menu {
 		int choice = 0;
 		
 		do {
-			System.out.println("Employee Login");
-			System.out.println("==============");
-			System.out.println("1.) Back");
-			System.out.println("2.) Login");
+			log.trace("Employee Login");
+			log.trace("==============");
+			log.trace("1.) Back");
+			log.trace("2.) Login");
 			
 		try {
 			choice = Integer.parseInt(Menu.sc.nextLine());
@@ -41,25 +41,25 @@ public class EmployeeLoginMenu implements Menu {
 			String passWord = getcreateEmployeePWInput();
 			try {
 				Employee employee = employeeLoginService.lookforUNPW(userName, passWord);
-				System.out.println(employee);
+				log.trace(employee);
 				
 				if (employee != null) {
 					Menu employeeActionMenu = new EmployeeActionMenu();
 					employeeActionMenu.display();
 					
 				} else {
-					System.out.println("login credentials not found");
+					log.trace("login credentials not found");
 				}
 				
 			} catch (EmployeeNotFoundException e) {
-				System.out.println(e.getMessage());
+				log.error(e.getMessage());
 			} catch (DatabaseConnectionException e) {
-				e.printStackTrace();
+				log.error(e.getStackTrace());
 			}
 			
 			break;
 			default:
-				System.out.println("No valid choice entered");
+				log.trace("No valid choice entered");
 		}
 		
 	} while (choice !=1);
@@ -69,7 +69,7 @@ public class EmployeeLoginMenu implements Menu {
 		String userName;
 		while (true) {
 			
-			System.out.println("Enter userName: ");
+			log.trace("Enter userName: ");
 			userName = Menu.sc.nextLine();
 			
 			return userName;						
@@ -81,8 +81,8 @@ public class EmployeeLoginMenu implements Menu {
 		String passWord;
 		while (true) {
 			
-			System.out.println("Enter your Password: ");
-			passWord = sc.nextLine();
+			log.trace("Enter your Password: ");
+			passWord = Menu.sc.nextLine();
 			return passWord;
 		}
 	}

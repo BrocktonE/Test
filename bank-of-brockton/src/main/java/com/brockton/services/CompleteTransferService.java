@@ -30,8 +30,7 @@ public class CompleteTransferService {
 					try {
 						count = accountDAO.completeTransfer(accountNumberR);
 					} catch (DatabaseConnectionException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
+						
 					}
 					
 					connection.commit();

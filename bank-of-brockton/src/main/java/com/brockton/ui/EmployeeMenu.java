@@ -21,11 +21,11 @@ public class EmployeeMenu implements Menu {
 	public void display() {
 		int choice = 0;
 		do {
-			System.out.println("Employee Menu");
-			System.out.println("=============");
-			System.out.println("1.) Back");
-			System.out.println("2.) Create UN and PW");
-			System.out.println("Choose 1 or 2");
+			log.trace("Employee Menu");
+			log.trace("=============");
+			log.trace("1.) Back");
+			log.trace("2.) Create UN and PW");
+			log.trace("Choose 1 or 2");
 			
 			try {
 				choice = Integer.parseInt(Menu.sc.nextLine());
@@ -37,13 +37,13 @@ public class EmployeeMenu implements Menu {
 				break;
 			case 2:
 				String EmployeeSelectedUN = getcreateEmployeeUNInput();
-				String EmployeeSelectedPW = getcreateEmployeeUNInput();
+				String EmployeeSelectedPW = getcreateEmployeePWInput();
 				Employee newUNandPW = new Employee(EmployeeSelectedUN, EmployeeSelectedPW);
 				employeeService.createEmployeeUnPw(newUNandPW);
 				break;
 			
 			default:
-				System.out.println("No valid choice entered");	
+				log.trace("No valid choice entered");	
 			}
 			
 		} while (choice !=1);
@@ -54,17 +54,19 @@ public class EmployeeMenu implements Menu {
 		String userName;
 		while (true) {
 			
-			System.out.println("Enter Username: ");
-			userName = sc.nextLine();
+			log.trace("Enter Username: ");
+			userName = Menu.sc.nextLine();
+			
 			return userName;
 		}
+		
 	}
 	
 	public String getcreateEmployeePWInput() {
 		String passWord;
 		while (true) {
 			
-			System.out.println("Enter PassWord: ");
+			log.trace("Enter Password: ");
 			passWord = sc.nextLine();
 			return passWord;
 		}
