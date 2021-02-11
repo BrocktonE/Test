@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import org.apache.log4j.Logger;
 import com.brockton.dao.AccountDAO;
 import com.brockton.dao.AccountDAOImpl;
+import com.brockton.exceptions.AccountNotFoundException;
 import com.brockton.exceptions.DatabaseConnectionException;
 import com.brockton.model.Account;
 import com.brockton.util.ConnectionUtil;
@@ -25,7 +26,12 @@ public int transfer(Account account)	{
 		
 			connection.setAutoCommit(false);
 			
-			count = accountDAO.transfer(account);
+			try {
+				count = accountDAO.transfer(account);
+			} catch (AccountNotFoundException e) {
+				log.error("Account not found");
+				log.error(e.getMessage());
+			}
 			
 			connection.commit();
 			

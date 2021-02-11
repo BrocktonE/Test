@@ -10,13 +10,12 @@ import com.brockton.services.AccountConfirmService;
 import com.brockton.services.CompleteTransferService;
 import com.brockton.services.GetPendingTransferService;
 import com.brockton.services.GiveTransferService;
-import com.brockton.services.RemoveTransferService;
+
 
 public class GetMoneyMenu implements Menu {
 	private static Logger log=Logger.getLogger(GetMoneyMenu.class);
 	public GiveTransferService giveTransferService;
 	public CompleteTransferService completeTransferService;
-	public RemoveTransferService removeTransferService;
 	public GetPendingTransferService getPendingTransferService;
 	public AccountConfirmService accountConfirmService;
 	Withdrawal customer = null;
@@ -27,7 +26,7 @@ public class GetMoneyMenu implements Menu {
 		getPendingTransferService = new GetPendingTransferService();
 		completeTransferService = new CompleteTransferService();
 		giveTransferService = new GiveTransferService();
-		removeTransferService = new RemoveTransferService();
+	//	removeTransferService = new RemoveTransferService();
 		accountConfirmService = new AccountConfirmService();
 		
 		
@@ -55,11 +54,15 @@ public class GetMoneyMenu implements Menu {
 			case 1:
 				break;
 			case 2:
-				int accountNumberG = getGivingANInput();
+				
 				int accountNumberR = getCustomerANInput();
-
-				// AccountNumber accountNumberG =
-				// getPendingTransferService.getPendingTransfer(accountNumberR);
+				int accountNumberG = 0;
+				try {
+					accountNumberG = getPendingTransferService.getPendingTransfer(accountNumberR);
+				} catch (AccountNotFoundException | DatabaseConnectionException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 
 				try {
 					Withdrawal account = accountConfirmService.getUNandPW(accountNumberR);
@@ -67,12 +70,11 @@ public class GetMoneyMenu implements Menu {
 					
 					 if (account.equals(customer)) {
 						
-						giveTransferService.giveTransfer(accountNumberG);
-						completeTransferService.completeTransfer(accountNumberR);
-						removeTransferService.removeTransfer(accountNumberG, accountNumberR);
-						log.trace("Success, your money has been transfered to you");
-
-					}
+						 
+						giveTransferService.giveTransfer(accountNumberG, accountNumberR);
+						
+						
+					 }
 					
 					else {
 						throw new AccountNotFoundException();
@@ -113,6 +115,7 @@ public class GetMoneyMenu implements Menu {
 
 			log.trace("Enter Reciepient Account Number: ");
 			accountNumberR = Integer.parseInt(Menu.sc.nextLine());
+			
 
 			return accountNumberR;
 

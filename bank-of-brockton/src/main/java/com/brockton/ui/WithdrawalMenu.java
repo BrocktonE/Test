@@ -54,12 +54,18 @@ public class WithdrawalMenu implements Menu {
 						withdrawalService.makeWithdrawal(accountNumber, withdrawal);
 						
 					}
+					
+					else {
+						throw new AccountNotFoundException();
+						
+					}
+					
 				} catch (AccountNotFoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					log.error("Please enter an Account Number you currently own");
+					log.error(e.getMessage());
 				} catch (DatabaseConnectionException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					log.error("Connection Failed");
+					log.error(e.getMessage());
 				}
 			break;
 		default:
@@ -88,6 +94,10 @@ public class WithdrawalMenu implements Menu {
 		
 		log.trace("Enter your Withdrawal Ammount:");
 		withdrawal = Integer.parseInt(Menu.sc.nextLine());
+		if (withdrawal < 0) {
+			log.trace("Input must be positive");
+			withdrawal = 0;
+		} else
 		
 		return withdrawal;
 	}	 

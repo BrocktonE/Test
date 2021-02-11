@@ -20,10 +20,10 @@ public class GetPendingTransferService {
 	
 	}
 	
-	public AccountNumber getPendingTransfer(int accountNumber) throws AccountNotFoundException, DatabaseConnectionException {
-		AccountNumber accountNumberG = accountDAO.getPendingTransfer(accountNumber);
+	public int getPendingTransfer(int accountNumber) throws AccountNotFoundException, DatabaseConnectionException {
+		int accountNumberG = accountDAO.getPendingTransfer(accountNumber);
 		
-		if (accountNumberG != null) {
+		if (accountNumberG != 0) {
 			return accountNumberG;
 		} else {
 			throw new AccountNotFoundException("Your account number: " + accountNumber + "was not found");

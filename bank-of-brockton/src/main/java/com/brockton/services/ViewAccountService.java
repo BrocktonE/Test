@@ -2,6 +2,8 @@ package com.brockton.services;
 
 
 
+import java.util.List;
+
 import org.apache.log4j.Logger;
 
 import com.brockton.dao.ActionDAO;
@@ -20,11 +22,12 @@ public class ViewAccountService {
 		actionDAO = new ActionDAOImpl();
 			
 	}
-	public Account viewAccount(int customerId) throws AccountNotFoundException, DatabaseConnectionException {
-	Account account = actionDAO.viewAccount(customerId);
+	public List<Account> viewAccount(int customerId) throws AccountNotFoundException, DatabaseConnectionException {
+	List accountList = actionDAO.viewAccount(customerId);
 		
-		if (account != null) {
-			return account;
+		if (accountList != null) {
+			System.out.println(accountList);
+			return accountList;
 		} else {
 			throw new AccountNotFoundException("An Account with Customer ID" + customerId + "was not found");
 

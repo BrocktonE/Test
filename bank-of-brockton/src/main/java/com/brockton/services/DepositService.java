@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import org.apache.log4j.Logger;
 import com.brockton.dao.AccountDAO;
 import com.brockton.dao.AccountDAOImpl;
+import com.brockton.exceptions.AccountNotFoundException;
 import com.brockton.exceptions.DatabaseConnectionException;
 import com.brockton.util.ConnectionUtil;
 
@@ -19,7 +20,7 @@ public class DepositService {
 	}
 
 		
-	public int makeDeposit(int deposit, int accountNumber) throws DatabaseConnectionException {
+	public int makeDeposit(int deposit, int accountNumber) throws DatabaseConnectionException, AccountNotFoundException {
 		
 	
 		

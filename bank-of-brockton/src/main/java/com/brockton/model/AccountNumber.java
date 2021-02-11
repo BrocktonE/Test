@@ -22,10 +22,15 @@ public class AccountNumber {
 			this.pendingTransfer = pendingTransfer;
 		}
 
+	
+			
+
+	
 		@Override
 		public String toString() {
-			return "pendingTransfer";
+			return  + pendingTransfer + "]" ;
 		}
+
 
 		@Override
 		public int hashCode() {
@@ -48,6 +53,10 @@ public class AccountNumber {
 				return false;
 			return true;
 		}
+
+
+
+
 		
 		}
 	

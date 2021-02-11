@@ -1,5 +1,9 @@
 package com.brockton.ui;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
 import org.apache.log4j.Logger;
 
 
@@ -8,6 +12,7 @@ import com.brockton.exceptions.DatabaseConnectionException;
 import com.brockton.model.Withdrawal;
 import com.brockton.services.AccountConfirmService;
 import com.brockton.services.DepositService;
+import com.brockton.util.ConnectionUtil;
 
 public class DepositMenu implements Menu {
 	private static Logger log=Logger.getLogger(DepositMenu.class);
@@ -97,8 +102,17 @@ public class DepositMenu implements Menu {
 
 			log.trace("Enter your Deposit Ammount:");
 			deposit = Integer.parseInt(Menu.sc.nextLine());
+			if (deposit < 0) {
+				log.trace("Input must be positive");
+				deposit = 0;
+			} else
+			
 
 			return deposit;
 		}
 	}
 }
+
+
+
+			

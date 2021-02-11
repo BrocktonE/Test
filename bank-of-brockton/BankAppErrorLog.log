@@ -22,3 +22,25 @@
 {ERROR}    [com.brockton.ui.EmployeeLoginMenu]    Your Login Credentials are Invalid    2021-02-10 14:01:05,161      
 {ERROR}    [com.brockton.ui.EmployeeLoginMenu]    Your Login Credentials are Invalid    2021-02-10 14:08:18,809      
 {ERROR}    [com.brockton.dao.EmployeeDAOImpl]    ERROR: value too long for type character varying(8)    2021-02-10 14:13:30,904      
+{ERROR}    [com.brockton.ui.CustLoginMenu]    Your Login Credentials were Invalid    2021-02-10 15:33:47,981      
+{ERROR}    [com.brockton.ui.GetMoneyMenu]    Please enter and Account Number that you currently own    2021-02-10 16:01:32,292      
+{ERROR}    [com.brockton.ui.GetMoneyMenu]        2021-02-10 16:01:32,292      
+{ERROR}    [com.brockton.ui.GetMoneyMenu]    Please enter and Account Number that you currently own    2021-02-10 16:28:22,941      
+{ERROR}    [com.brockton.ui.GetMoneyMenu]        2021-02-10 16:28:22,941      
+{ERROR}    [com.brockton.ui.CustLoginMenu]    Your Login Credentials were Invalid    2021-02-10 17:33:16,127      
+{ERROR}    [com.brockton.ui.CustLoginMenu]    Your Login Credentials were Invalid    2021-02-10 22:02:15,191      
+{ERROR}    [com.brockton.ui.CustLoginMenu]    Your Login Credentials were Invalid    2021-02-10 22:24:45,811      
+{ERROR}    [com.brockton.dao.AccountDAOImpl]    Problem with SQL    2021-02-10 22:40:06,640      
+{ERROR}    [com.brockton.dao.AccountDAOImpl]    ERROR: insert or update on table "transactions" violates foreign key constraint "fk_customer"
+  Detail: Key (account_number)=(4444) is not present in table "accounts".    2021-02-10 22:40:06,640      
+{ERROR}    [com.brockton.ui.EmployeeLoginMenu]    Your Login Credentials are Invalid    2021-02-10 22:41:53,756      
+{ERROR}    [com.brockton.ui.CustLoginMenu]    Your Login Credentials were Invalid    2021-02-10 22:42:30,531      
+{ERROR}    [com.brockton.ui.CheckBalanceMenu]    Please enter an Account Number that you currently own    2021-02-10 22:43:32,514      
+{ERROR}    [com.brockton.ui.CheckBalanceMenu]        2021-02-10 22:43:32,514      
+{ERROR}    [com.brockton.ui.CustLoginMenu]    Your Login Credentials were Invalid    2021-02-10 22:55:29,476      
+{ERROR}    [com.brockton.ui.GetMoneyMenu]    Please enter and Account Number that you currently own    2021-02-10 22:58:44,610      
+{ERROR}    [com.brockton.ui.GetMoneyMenu]        2021-02-10 22:58:44,610      
+{ERROR}    [com.brockton.ui.CustLoginMenu]    Your Login Credentials were Invalid    2021-02-11 08:49:16,737      
+{ERROR}    [com.brockton.ui.DepositMenu]    Please enter an Account you currently own    2021-02-11 09:03:55,646      
+{ERROR}    [com.brockton.ui.CustLoginMenu]    Your Login Credentials were Invalid    2021-02-11 09:10:32,774      
+{ERROR}    [com.brockton.ui.ViewMenu]    No account was found with Customer ID matching 33    2021-02-11 09:18:50,741      

@@ -101,7 +101,7 @@ public class AccountDAOImpl implements AccountDAO {
 	
 	@Override
 	
-	public int makeDeposit(int accountNumber, int deposit) throws DatabaseConnectionException  {
+	public int makeDeposit(int accountNumber, int deposit) throws DatabaseConnectionException, AccountNotFoundException  {
 		int count = 0;
 		try (Connection connection = ConnectionUtil.getConnection()) {
 
@@ -125,13 +125,16 @@ public class AccountDAOImpl implements AccountDAO {
 	}
 
 	@Override
-	public int transfer(Account account) throws SQLException {
+	public int transfer(Account account) throws SQLException, DatabaseConnectionException, AccountNotFoundException {
 		int count = 0;
 		try (Connection connection = ConnectionUtil.getConnection()) {
 
 			String sql = "UPDATE banking_1.accounts SET transfer_amount=?, pending_transfer=? WHERE banking_1.accounts.account_number=?;"
-					+ "UPDATE banking_1.accounts SET transfer_amount=?, from_transfer=? WHERE banking_1.accounts.account_number=?";
-
+					+ "UPDATE banking_1.accounts SET transfer_amount=?, from_transfer=? WHERE banking_1.accounts.account_number=?;"
+					+"INSERT INTO banking_1.transactions (transaction_type, amount, account_number)"
+					+ "	VALUES('transferfrom',?,?);"
+					+"INSERT INTO banking_1.transactions (transaction_type, amount, account_number)"
+					+ "VALUES('transfertoo', ?,?)";
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
 			preparedStatement.setInt(1, account.getTransferAmount());
@@ -140,34 +143,59 @@ public class AccountDAOImpl implements AccountDAO {
 			preparedStatement.setInt(4, account.getTransferAmount());
 			preparedStatement.setInt(5, account.getAccountNumber());
 			preparedStatement.setInt(6, account.getAccountNumber());
+			preparedStatement.setInt(7, account.getTransferAmount());
+			preparedStatement.setInt(8, account.getAccountNumber());
+			preparedStatement.setInt(9, account.getTransferAmount());
+			preparedStatement.setInt(10, account.getPendingTransferAN());
+			
 
 			count = preparedStatement.executeUpdate();
 
 		} catch (SQLException | DatabaseConnectionException e) {
-			
+			log.error("Problem with SQL");
+			log.error(e.getMessage());
 		}
 		return count;
 
 	}
 
 	@Override
-	public int giveTransfer(int accountNumberG) throws DatabaseConnectionException, AccountNotFoundException {
+	public int giveTransfer(int accountNumberG, int accountNumberR) throws DatabaseConnectionException, AccountNotFoundException {
 		int count = 0;
 		try(Connection connection = ConnectionUtil.getConnection()) {
+			connection.setAutoCommit(false);
 			
-			String sql = "UPDATE banking_1.accounts SET balance = (balance - transfer_amount) WHERE banking_1.accounts.account_number = ?";
-
-							
-		PreparedStatement preparedStatement = connection.prepareStatement(sql);
-			
-			preparedStatement.setInt(1, accountNumberG);
-			
+			String sql = "UPDATE banking_1.accounts SET balance = (balance - transfer_amount) WHERE banking_1.accounts.account_number = ?";								
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);	
+			preparedStatement.setInt(1, accountNumberG);	
 			count = preparedStatement.executeUpdate();
+			System.out.println(count);
+			
+			String sql4 = "UPDATE banking_1.accounts SET transfer_amount=0, from_transfer=0 WHERE banking_1.accounts.account_number=?";
+			PreparedStatement preparedStatement4 = connection.prepareStatement(sql4);
+			preparedStatement4.setInt(1, accountNumberG);
+			count = preparedStatement4.executeUpdate();
+			System.out.println(count);
+			
+			String sql2 = "UPDATE banking_1.accounts SET balance = (balance + transfer_amount) WHERE banking_1.accounts.account_number = ?";
+			PreparedStatement preparedStatement2 = connection.prepareStatement(sql2);
+			preparedStatement2.setInt(1, accountNumberR);	
+			count = preparedStatement2.executeUpdate();
+			System.out.println(count);
+			
+			
+			String sql3 = "UPDATE banking_1.accounts SET transfer_amount=0, pending_transfer=0 WHERE banking_1.accounts.account_number=?";
+			PreparedStatement preparedStatement3 = connection.prepareStatement(sql3);
+			preparedStatement3.setInt(1, accountNumberR);
+			count = preparedStatement3.executeUpdate();
+		
+			connection.commit();
+					
 		} catch (SQLException e) {
 		e.printStackTrace();
 		}
 		
-		return 0;
+		return count;
 		
 
  }
@@ -191,10 +219,10 @@ public class AccountDAOImpl implements AccountDAO {
 		return 0;
 	}
 	@Override
-	public int makeWithdrawal(int accountNumber, int withdrawal) throws DatabaseConnectionException {
+	public int makeWithdrawal(int accountNumber, int withdrawal) throws DatabaseConnectionException, AccountNotFoundException {
 		int count = 0;
 		try (Connection connection = ConnectionUtil.getConnection()) {
-
+			
 			String sql = "UPDATE banking_1.accounts SET balance = (balance - ?) WHERE banking_1.accounts.account_number=?;"
 					+ "INSERT INTO banking_1.transactions (transaction_type, amount, account_number)"
 					+ "VALUES('withdraw',?,?)";
@@ -206,6 +234,8 @@ public class AccountDAOImpl implements AccountDAO {
 			preparedStatement.setInt(4, accountNumber);
 
 			count = preparedStatement.executeUpdate();
+			
+			
 
 		} catch (SQLException e) {
 			
@@ -243,30 +273,29 @@ public class AccountDAOImpl implements AccountDAO {
 
 	}
 
+//	@Override
+//	public int removeTransfer(int accountNumberG, int accountNumberR) throws SQLException {
+//		int count = 0;
+//		try (Connection connection = ConnectionUtil.getConnection()) {
+//
+//			String sql = "UPDATE banking_1.accounts SET transfer_amount=0, pending_transfer=0 WHERE banking_1.accounts.account_number=?;"
+//					+ "UPDATE banking_1.accounts SET transfer_amount=0, from_transfer=0 WHERE banking_1.accounts.account_number=?";
+//			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+//
+//			preparedStatement.setInt(1, accountNumberR);
+//			preparedStatement.setInt(2, accountNumberG);
+//
+//			count = preparedStatement.executeUpdate();
+//
+//		} catch (SQLException | DatabaseConnectionException e) {
+//			log.error(e.getMessage());
+//		}
+//	return count;
+
+//	}
 	@Override
-	public int removeTransfer(int accountNumberG, int accountNumberR) throws SQLException {
-		int count = 0;
-		try (Connection connection = ConnectionUtil.getConnection()) {
-
-			String sql = "UPDATE banking_1.accounts SET transfer_amount=0, pending_transfer=0 WHERE banking_1.accounts.account_number=?;"
-					+ "UPDATE banking_1.accounts SET transfer_amount=0, from_transfer=0 WHERE banking_1.accounts.account_number=?";
-
-			PreparedStatement preparedStatement = connection.prepareStatement(sql);
-
-			preparedStatement.setInt(1, accountNumberR);
-			preparedStatement.setInt(2, accountNumberG);
-
-			count = preparedStatement.executeUpdate();
-
-		} catch (SQLException | DatabaseConnectionException e) {
-			log.error(e.getMessage());
-		}
-		return count;
-
-	}
-	@Override
-	public AccountNumber getPendingTransfer(int accountNumber) throws AccountNotFoundException, DatabaseConnectionException {
-		AccountNumber accountNumberG = null;
+	public int getPendingTransfer(int accountNumber) throws AccountNotFoundException, DatabaseConnectionException {
+		int accountNumberG = 0;
 		try (Connection connection = ConnectionUtil.getConnection()) {
 
 			String sql = "SELECT pending_transfer FROM banking_1.accounts WHERE account_number = ?";
@@ -275,8 +304,8 @@ public class AccountDAOImpl implements AccountDAO {
 			ResultSet rs = preparedStatement.executeQuery();
 
 			if (rs.next()) {
-				accountNumberG = new AccountNumber();
-				accountNumberG.setPendingTransfer(rs.getInt("pending_transfer"));
+				 accountNumberG = rs.getInt("pending_transfer");
+				
 
 			} else {
 				throw new AccountNotFoundException("Account Number: " + accountNumber + "was not found");

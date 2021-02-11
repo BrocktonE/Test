@@ -17,14 +17,14 @@ public interface AccountDAO {
 	
 	public int createApplication(Application application) throws SQLException, DatabaseConnectionException;
 	public Withdrawal getBalance(int accountNumber) throws DatabaseConnectionException, AccountNotFoundException;
-	public int makeWithdrawal(int accountNumber, int withdrawal) throws DatabaseConnectionException;
-	public int makeDeposit(int accountNumber, int deposit) throws DatabaseConnectionException;
-	public int transfer(Account accounts) throws SQLException;
+	public int makeWithdrawal(int accountNumber, int withdrawal) throws DatabaseConnectionException, AccountNotFoundException;
+	public int makeDeposit(int accountNumber, int deposit) throws DatabaseConnectionException, AccountNotFoundException;
+	public int transfer(Account accounts) throws SQLException, DatabaseConnectionException, AccountNotFoundException;
 	public int completeTransfer(int accountNumberR) throws DatabaseConnectionException;
 	public Withdrawal getUNandPW(int accountNumber) throws DatabaseConnectionException, AccountNotFoundException;
-	public int giveTransfer(int accountNumberG) throws DatabaseConnectionException, AccountNotFoundException;
-	public int removeTransfer(int accountNumberG, int accountNumberR) throws SQLException, DatabaseConnectionException;
-	public AccountNumber getPendingTransfer(int accountNumber) throws AccountNotFoundException, DatabaseConnectionException;
+	public int giveTransfer(int accountNumberG, int accountNumberR) throws DatabaseConnectionException, AccountNotFoundException;
+//	public int removeTransfer(int accountNumberG, int accountNumberR) throws SQLException, DatabaseConnectionException;
+	public int getPendingTransfer(int accountNumber) throws AccountNotFoundException, DatabaseConnectionException;
 	
 	
 }

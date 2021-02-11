@@ -21,21 +21,21 @@ public class GiveTransferService {
 			accountDAO = new AccountDAOImpl();
 		}
 		
-		public int giveTransfer(int accountNumberG) throws DatabaseConnectionException, AccountNotFoundException {
+		public int giveTransfer(int accountNumberG, int accountNumberR) throws DatabaseConnectionException, AccountNotFoundException {
 			
 			int count = 0;
 			
 					try (Connection connection = ConnectionUtil.getConnection()) {
-						connection.setAutoCommit(false);
+						
 						
 						try {
-							count = accountDAO.giveTransfer(accountNumberG);
+							count = accountDAO.giveTransfer(accountNumberG, accountNumberR);
 						} catch (DatabaseConnectionException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
 						
-						connection.commit();
+					
 						
 					} catch (SQLException e) {
 						

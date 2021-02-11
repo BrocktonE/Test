@@ -7,6 +7,7 @@ import org.apache.log4j.Logger;
 
 import com.brockton.dao.AccountDAO;
 import com.brockton.dao.AccountDAOImpl;
+import com.brockton.exceptions.AccountNotFoundException;
 import com.brockton.exceptions.DatabaseConnectionException;
 import com.brockton.util.ConnectionUtil;
 
@@ -19,10 +20,7 @@ public class WithdrawalService {
 			accountDAO = new AccountDAOImpl();
 			
 		}
-		public int makeWithdrawal(int withdrawal, int accountNumber) {
-			
-		
-			
+		public int makeWithdrawal(int withdrawal, int accountNumber) throws DatabaseConnectionException, AccountNotFoundException {	
 			int count = 0;
 			
  				try (Connection connection = ConnectionUtil.getConnection()) {
@@ -33,8 +31,8 @@ public class WithdrawalService {
 			    	
 			    	connection.commit();
 				
-			} catch (SQLException | DatabaseConnectionException e) {
- 				log.trace(e);
+			} catch (SQLException e) {
+ 				
 			}
 		return count;
 }

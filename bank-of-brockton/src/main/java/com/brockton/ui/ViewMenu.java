@@ -38,8 +38,8 @@ int choice = 0;
 			case 2:
 				int customerId = getCustomerByIdInput();
 				try {
-					Account account = viewAccountService.viewAccount(customerId);
-					log.trace(account);
+					viewAccountService.viewAccount(customerId);
+				
 				} catch (AccountNotFoundException e) {
 					log.error(e.getMessage());
 				} catch (DatabaseConnectionException e) {

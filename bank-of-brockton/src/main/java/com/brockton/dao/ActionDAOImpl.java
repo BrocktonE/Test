@@ -81,8 +81,8 @@ public class ActionDAOImpl implements ActionDAO {
 	}
 
 	@Override
-	public Account viewAccount(int customerId) throws DatabaseConnectionException, AccountNotFoundException {
-		Account account = null;
+	public List<Account> viewAccount(int customerId) throws DatabaseConnectionException, AccountNotFoundException {
+		List<Account> accountList = new ArrayList<>();
 		try (Connection connection = ConnectionUtil.getConnection()) {
 			String sql = "SELECT * FROM banking_1.accounts WHERE accounts.customer_id = ?";
 			PreparedStatement pstmt = connection.prepareStatement(sql);
@@ -90,23 +90,22 @@ public class ActionDAOImpl implements ActionDAO {
 			
 			ResultSet rs = pstmt.executeQuery();
 
-			if (rs.next()) {
-				int id = rs.getInt("id");
-				int accountNumber = rs.getInt("account_number");
-				String accountType = rs.getString("account_type");
-				int startingBalance = rs.getInt("starting_balance");
-				int balance = rs.getInt("balance");
-				int customerId1 = rs.getInt("customer_id");
-				int fromTransferAN = rs.getInt("from_transfer");
-				int pendingTransferAN = rs.getInt("pending_transfer");
-				int transferAmount = rs.getInt("transfer_amount");
-				String customerUN = null;
-				String customerPW = null;
+			while (rs.next()) {
+				Account account = new Account();
+				account.setId(rs.getInt("id"));
+				account.setAccountNumber(rs.getInt("account_number"));
+				account.setAccountType(rs.getString("account_type"));
+				account.setStartingBalance(rs.getInt("starting_balance"));
+				account.setBalance(rs.getInt("balance"));
+				account.setCustomerId(rs.getInt("customer_id"));
+				account.setFromTransferAN(rs.getInt("from_transfer"));
+				account.setPendingTransferAN(rs.getInt("pending_transfer"));
+				account.setTransferAmount(rs.getInt("transfer_amount"));
+				account.setCustomerUN(null);
+				account.setCustomerPW(null);
 				
-				account = new Account(id, accountNumber, accountType, startingBalance, balance, customerId1, fromTransferAN, pendingTransferAN, transferAmount, customerUN, customerPW);
-				
-			} else {
-				throw new AccountNotFoundException("No account was found with Customer ID matching " + customerId);
+			//	accountList = new Account(id, accountNumber, accountType, startingBalance, balance, customerId1, fromTransferAN, pendingTransferAN, transferAmount, customerUN, customerPW);
+				accountList.add(account);
 			}
 
 		} catch (SQLException e) {
@@ -114,7 +113,7 @@ public class ActionDAOImpl implements ActionDAO {
 	
 		}
 
-		return account;
+		return accountList;
 	
 	
 	}

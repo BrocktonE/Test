@@ -59,11 +59,16 @@ public class TransferMenu implements Menu {
 			try {
 				log.trace("Enter the amount you would like to transfer: ");
 			amount = Integer.parseInt(Menu.sc.nextLine());
+			if (amount < 0) {
+				log.trace("Input must be positive");
+				amount = 0;
+			} else
+				return amount;
 			} catch (NumberFormatException e) {
 				System.out.println("Invalid Input, try again");
 				continue;
 			}
-			return amount;		
+				
 			}
 			
 		}

@@ -12,7 +12,7 @@ public interface ActionDAO {
 	
 	public List<Application> getApplications() throws DatabaseConnectionException;
 	public int approveAccount (int id, String approve) throws DatabaseConnectionException;
-	public Account viewAccount(int customerId) throws DatabaseConnectionException, AccountNotFoundException;
+	public List<Account> viewAccount(int customerId) throws DatabaseConnectionException, AccountNotFoundException;
 	public List<Transactions> viewTransactions() throws DatabaseConnectionException;
 }
 

@@ -32,6 +32,7 @@ public class AccountMenu implements Menu {
 			log.trace("6.) Make a Transfer");
 			log.trace("7.) Accept a Transfer");
 			log.trace("8.) Check UN and PW");
+			log.trace("9.) Get pending");
 			
 			try {
 				choice = Integer.parseInt(Menu.sc.nextLine());
@@ -69,8 +70,9 @@ public class AccountMenu implements Menu {
 				Menu checkUNandPWMenu = new CheckUNandPWMenu();
 				checkUNandPWMenu.display();
 			break;
-			case 9:
-//				Menu getPendingTransferMenu 
+		//	case 9:
+		//		Menu getPendingTransferMenu = new GetPendingTransferMenu();
+		//		getPendingTransferMenu.display();
 			default:
 				log.trace("Choose Again");
 				break;				
