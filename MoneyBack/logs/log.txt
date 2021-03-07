@@ -1,0 +1,17 @@
+2021-03-06 14:28:21 INFO  ConnectionUtil:43 - connection successful
+2021-03-06 14:28:21 INFO  ConnectionUtil:53 - connected to db
+2021-03-06 14:28:21 WARN  EmployeeDAOImpl:44 - Unable to inser user
+org.postgresql.util.PSQLException: ERROR: duplicate key value violates unique constraint "ers_users_pkey"
+  Detail: Key (ers_users_id)=(1) already exists.
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2440)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2183)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:308)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:441)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:365)
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:143)
+	at org.postgresql.jdbc.PgPreparedStatement.execute(PgPreparedStatement.java:132)
+	at com.revature.respositories.EmployeeDAOImpl.insert(EmployeeDAOImpl.java:38)
+	at com.revature.services.EmployeeService.insert(EmployeeService.java:15)
+	at com.revature.util.ConnectionUtil.main(ConnectionUtil.java:63)
+2021-03-06 14:38:09 INFO  ConnectionUtil:43 - connection successful
+2021-03-06 14:38:09 INFO  ConnectionUtil:53 - connected to db
