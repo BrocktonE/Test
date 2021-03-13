@@ -20,32 +20,26 @@
 	</div>
 	<div class="container-fluid">
 	
-		<form name="loginForm" onsubmit="sendRequest(event.preventDefault())"> 
+		<form name="approveRequest" onsubmit="sendApprove(event.preventDefault())"> 
 			<!-- onSubmit=sendLogin())> sendLogin is a JS function  -->
 			<!-- we can add an event listener here to trigger a javascript function -->
 			
 			<div class="form-group">
-				<label for="amount">Amount</label>
+				<label for="requestId">RequestId</label>
 				<!--  note that the name of the inpu matches to our loginServlet logic -->
-				<input type="text" class="form-control" name="amount" id="amount"
-					placeholder="Enter Amount">
+				<input type="text" class="form-control" name="requestId" id="requestId"
+					placeholder="Please enter the request you would like approve">
 			</div>
 			
 			
 			<div class="form-group">
-				<label for="description">Description</label>
+				<label for="approve">Approve or Deny</label>
 				<!--  note that the name of the inpu matches to our loginServlet logic -->
-				<input type="text" class="form-control" name="description" id="description"
-					placeholder="Describe the reason for your request">
+				<input type="text" class="form-control" name="approve" id="approve"
+					placeholder="Please enter 2 to Approve or 3 to Deny">
 			</div>
 			
-				<div class="form-group">
-				<label for="type">Type</label>
-				<!--  note that the name of the inpu matches to our loginServlet logic -->
-				<input type="text" class="form-control" name="type" id="type"
-					placeholder="Choose 1-4">
-			</div>
-			
+
 			
 			<div id="warningText"></div>
 			
@@ -53,7 +47,7 @@
 		</form>
 	</div>
 	
- <script src="scripts/index4.js"></script>
+ <script src="scripts/approverequest.js"></script>
 
 
 </body>

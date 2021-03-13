@@ -4,8 +4,11 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 
+import com.revature.models.AuthorId;
 import com.revature.models.Employee;
+import com.revature.models.ReimburseR;
 import com.revature.models.Request;
 import com.revature.respositories.EmployeeDAO;
 import com.revature.respositories.EmployeeDAOImpl;
@@ -14,6 +17,8 @@ import com.revature.util.ConnectionUtil;
 public class EmployeeService {
 	
 	public static EmployeeDAO eDao = new EmployeeDAOImpl();
+	
+	private static Logger log = Logger.getLogger(EmployeeService.class);
 	
 	public static boolean insert(Employee e) {
 		
@@ -65,7 +70,7 @@ public class EmployeeService {
 			
 		}
 		
-		public int createRequest(Request request) throws SQLException {
+		public static int createRequest(Request request) throws SQLException {
 		int count=0;
 		try (Connection connection = ConnectionUtil.getConnection()) {
 			
@@ -84,11 +89,29 @@ return count;
 	
 
 }
+		
+		public static List<ReimburseR> findAllR(int authorId) {
+			List reimbursementListR = eDao.findAllR(authorId);
+			log.info(reimbursementListR);
+			
+			if (reimbursementListR !=null) {
+				for(int i = 0; i<reimbursementListR.size(); i++) {
+					System.out.println(reimbursementListR.get(i));
+					
+				}
+				return reimbursementListR;
+			} else {
+				return null;
+			}
+		}
+
+
+	}
 	
 		
 		
 
-}
+
 
 
 

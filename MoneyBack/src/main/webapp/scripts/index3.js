@@ -9,6 +9,17 @@
 	 console.log(currentUser);
 	 
 	 if (currentUser != null) {
-		 welcome.innerHTML = "Welcome " + currentUser.firstName + " " + currentUser.lastName + " , to the Employee Home Page";
+		 welcome.innerHTML = "Welcome " + currentUser.firstName + " " + currentUser.lastName + " , to the Manager Home Page";
 	 }
+ }
+ 
+ function approve() {
+ 
+  window.location= "http://localhost:8080/MoneyBack/approverequest.html";
+ 
+ }
+ 
+ function reimbursementpage() {
+ window.location= "http://localhost:8080/MoneyBack/reimbursementlist.html";
+ 
  }

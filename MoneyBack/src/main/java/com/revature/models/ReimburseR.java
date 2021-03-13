@@ -1,22 +1,23 @@
 package com.revature.models;
 
-public class Request {
+public class ReimburseR {
 	
 	private int id;
-	private int amount;
+	private double amount;
 	private String description;
 	private int author;
 	private int resolver;
 	private int status;
 	private int type;
+
+
+
+	public ReimburseR() {
 	
-
-
-	public Request() {
-		super();
+	
 	}
-
-	public Request(int id, int amount, String description, int author, int resolver, int status, int type) {
+	
+	public ReimburseR(int id, double amount, String description, int author, int resolver, int status, int type) {
 		super();
 		this.id = id;
 		this.amount = amount;
@@ -25,39 +26,9 @@ public class Request {
 		this.resolver = resolver;
 		this.status = status;
 		this.type = type;
-	}
-	
-	public Request(int amount, String description, int author, int resolver, int status, int type) {
-		super();
-		this.amount = amount;
-		this.description = description;
-		this.author = author;
-		this.resolver = resolver;
-		this.status = status;
-		this.type = type;
+		
 		
 	}
-	public Request(int amount, String description, int author, int status, int type) {
-		super();
-		this.amount = amount;
-		this.description = description;
-		this.author = author;
-		this.status = status;
-		this.type = type;
-	
-	
-	
-	}
-	public Request(int amount, String description, int author,  int type) {
-		super();
-		this.amount = amount;
-		this.description = description;
-		this.author = author;
-		this.type = type;
-	
-	
-	
-}
 
 	public int getId() {
 		return id;
@@ -67,11 +38,11 @@ public class Request {
 		this.id = id;
 	}
 
-	public int getAmount() {
+	public double getAmount() {
 		return amount;
 	}
 
-	public void setAmount(int amount) {
+	public void setAmount(double amount) {
 		this.amount = amount;
 	}
 
@@ -117,7 +88,7 @@ public class Request {
 
 	@Override
 	public String toString() {
-		return "Request [id=" + id + ", amount=" + amount + ", description=" + description + ", author=" + author
+		return "ReimburseR [id=" + id + ", amount=" + amount + ", description=" + description + ", author=" + author
 				+ ", resolver=" + resolver + ", status=" + status + ", type=" + type + "]";
 	}
 
@@ -125,7 +96,9 @@ public class Request {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + amount;
+		long temp;
+		temp = Double.doubleToLongBits(amount);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
 		result = prime * result + author;
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
 		result = prime * result + id;
@@ -143,8 +116,8 @@ public class Request {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Request other = (Request) obj;
-		if (amount != other.amount)
+		ReimburseR other = (ReimburseR) obj;
+		if (Double.doubleToLongBits(amount) != Double.doubleToLongBits(other.amount))
 			return false;
 		if (author != other.author)
 			return false;
@@ -163,7 +136,5 @@ public class Request {
 			return false;
 		return true;
 	}
-	
 
-	
 }

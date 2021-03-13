@@ -9,8 +9,9 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-
+import com.revature.models.AuthorId;
 import com.revature.models.Employee;
+import com.revature.models.ReimburseR;
 import com.revature.models.Request;
 import com.revature.util.ConnectionUtil;
 
@@ -96,10 +97,10 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 	@Override
 	public int createRequest(Request request) throws SQLException {
 		int count = 0;
-		try (Connection connection = ConnectionUtil.getConnection()) {
-
-			String sql = "INSERT INTO brocktone.ers_reimbursement (reimb_amount, reimb_description, reimb_author, reimb_status_id, reimb_type_id) "
-					+ "VALUES (?, ?, ?, 1, ?,)";
+		try  {
+			Connection connection = ConnectionUtil.getConnection();
+			String sql = "INSERT INTO brocktone.ers_reimbursement (reimb_amount, reimb_description, reimb_submitted, reimb_author, reimb_status_id, reimb_type_id) "
+					+ "VALUES (?, ?, current_timestamp, ?, 1, ?)";
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
 			preparedStatement.setInt(1, request.getAmount());
@@ -113,5 +114,64 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 		}
 		return count;
 	}
-
+	
+	@Override
+	public List<ReimburseR> findAllR(int authorId) {
+List<ReimburseR> list = new ArrayList<ReimburseR>();
+		
+		try {
+			
+			Connection conn = ConnectionUtil.getConnection();
+			String sql = "SELECT * FROM ers_reimbursement WHERE reimb_status_id = 1 AND reimb_author = ?";
+			
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, authorId);
+			ResultSet rs = stmt.executeQuery();
+			 
+			while(rs.next()) {
+				int id = rs.getInt("reimb_id");
+				double amount  = rs.getDouble("reimb_amount");
+				String description = rs.getString("reimb_description");
+				int author = rs.getInt("reimb_author");
+				int resolver = rs.getInt("reimb_resolver");
+				int status = rs.getInt("reimb_status_id");
+				int type = rs.getInt("reimb_type_id");
+				
+				ReimburseR r = new ReimburseR(id, amount, description, author, resolver, status, type);
+				list.add(r);
+				
+				System.out.println(r);
+				
+				
+			}
+		
+		
+	} catch (SQLException e) {
+		log.warn(e);
+	}
+		
+	return list;
+	}
+	
 }
+	
+	
+	
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

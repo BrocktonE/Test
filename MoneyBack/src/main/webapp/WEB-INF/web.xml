@@ -19,6 +19,10 @@
     <url-pattern>/error</url-pattern>
     <url-pattern>/manager</url-pattern>
     <url-pattern>/request</url-pattern>
+    <url-pattern>/approverequest</url-pattern>
+    <url-pattern>/reimbursementlist</url-pattern>
+    <url-pattern>/reimbursementlistr</url-pattern>
+    <url-pattern>/viewinfo</url-pattern>
     
   </servlet-mapping>
   

@@ -1,5 +1,3 @@
-
-
  let welcome = document.getElementById('welcome');
  
  var userString = sessionStorage.getItem('currentUser');
@@ -17,25 +15,28 @@ console.log(userString);
 	 }
  }
  
- function sendRequest() {
+ function sendApprove() {
  
- let amount = document.getElementById('amount').value;
- let description = document.getElementById('description').value;
- let type = document.getElementById('type').value;
+ let requestId = document.getElementById('requestId').value;
+ let status = document.getElementById('approve').value;
  
-   let request = {
- 	amount : amount,
- 	description : description,     
- 	author : currentUser.id,
-	type : type
-	}
+ console.log(requestId);
+ console.log(status);
+ 
+ let approve = { 
+ 	id :currentUser.id,
+ 	status : status,
+ 	requestId : requestId
+ 	}
+ 	
+ console.log(approve);
  
  let xhr = new XMLHttpRequest();
  xhr.onreadystatechange = function() {
     if (this.readyState === 4 && this.status===200) {
         console.log("success");
 
-        window.location= "http://localhost:8080/MoneyBack/request.html";
+     
 
     }
     if (this.readyState === 4 && this.status === 204) { //204 means no content found but connection made
@@ -48,16 +49,13 @@ console.log(userString);
 
 }
 
-//3. xhr.open("POST, "wherever out login servlet is located, http:/localhost:8080/EmployeeDBServlets/url for the loginServlet")
+xhr.open("POST", "http://localhost:8080/MoneyBack/approverequest")
 
-xhr.open("POST", "http://localhost:8080/MoneyBack/request")
 
-//4. xhr.send();
- xhr.send(JSON.stringify(request))
+ xhr.send(JSON.stringify(approve))
  
  
  
  }
- 
  
  
